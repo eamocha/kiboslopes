@@ -1,0 +1,23 @@
+test on chrome
+
+assign from this date onwards DONE
+
+update the hover for itenerary as well during ajax
+
+===
+make the ajax lightweight and work on the whole database at once from backend DONE
+
+===
+on the itenerary
+
+============
+if any driver exist, remove DONE
+
+remove from this date onwards DONE
+
+
+====
+if an itenerary is deleted also delete event and driver assignmnet, REMOVE FROM events table
+
+
+drivercolorbox

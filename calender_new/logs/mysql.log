@@ -1,0 +1,40 @@
+2014-11-01T10:30:50+03:00
+Script name: /impalashuttle/calender_new/index.php
+MySQL error: Unknown column 'c.events_drivers_id' in 'field list'
+Query string: SELECT c.events_drivers_id,c.drivername,c.driverbgcolor,c.driverid,ed.label1 AS vehicle, ed.label2 AS phonenumber FROM categories AS c INNER JOIN events_drivers AS ed ON c.category_id=ed.driverid WHERE eventid=5950 AND taskdate='2014-10-20' ORDER BY drivername
+
+2014-11-13T15:19:30+03:00
+Script name: /calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''')' at line 1
+Query string: INSERT INTO events VALUES (NULL,DEFAULT,'11-15 Diego Wellig','morning at leisure and transfer to Nairobi for evening departure',22,22,'',1,'Francis Matano',0,DEFAULT,'2014-11-27','9999-00-00',DEFAULT,'20:30','22:45',0,0,0,0,'9999-00-00',-1,'francis@kiboslopessafaris.com','9999-00-00','2014-11-13',DEFAULT,,'')
+
+2014-11-13T15:21:13+03:00
+Script name: /calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''')' at line 1
+Query string: INSERT INTO events VALUES (NULL,DEFAULT,'11-15 Diego Wellig','morning at leisure and transfer to Nairobi for evening departure',22,22,'',1,'Francis Matano',0,DEFAULT,'2014-11-15','2014-11-27',DEFAULT,'20:30','22:40',0,0,0,0,'9999-00-00',-1,'francis@kiboslopessafaris.com','9999-00-00','2014-11-13',DEFAULT,,'')
+
+2016-02-01T12:16:10+03:00
+Script name: /kenyasite/calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY sequence' at line 1
+Query string: SELECT category_id AS cid FROM categories WHERE status >= 0 AND sequence >=  ORDER BY sequence
+
+2016-02-01T12:16:18+03:00
+Script name: /kenyasite/calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY sequence' at line 1
+Query string: SELECT category_id AS cid FROM categories WHERE status >= 0 AND sequence >=  ORDER BY sequence
+
+2016-02-13T10:44:22+03:00
+Script name: /kenyasite/calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''')' at line 1
+Query string: INSERT INTO events VALUES (NULL,DEFAULT,'02-12 AV Makijarvi','Arrival KIA, pick up and drive to Arusha, BB Kibo Palace Hotel',182,181,'-',1,'Abdi Jama',1,DEFAULT,'2016-02-12','2016-02-18',DEFAULT,'20:50','10:15',0,0,0,0,'9999-00-00',-1,'abdi@kiboslopessafaris.com','9999-00-00','2016-02-13',DEFAULT,,'')
+
+2017-07-31T13:56:45+03:00
+Script name: /calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rpeat=0,public=1,color='#000000',background='#FFCCCC',check1=0,label1='KBL 873M'' at line 1
+Query string: UPDATE categories SET name='ALEX WARUI',sequence=,rpeat=0,public=1,color='#000000',background='#FFCCCC',check1=0,label1='KBL 873M',mark1='ok',check2=0,label2='0721 846407',mark2='✓' WHERE category_id = 197
+
+2017-07-31T13:57:01+03:00
+Script name: /calender_new/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rpeat=0,public=1,color='#000000',background='#FFCCCC',check1=0,label1='KBL 873M'' at line 1
+Query string: UPDATE categories SET name='ALEX WARUI',sequence=,rpeat=0,public=1,color='#000000',background='#FFCCCC',check1=0,label1='KBL 873M',mark1='ok',check2=0,label2='0721 846407',mark2='✓' WHERE category_id = 197
+

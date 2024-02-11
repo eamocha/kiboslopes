@@ -1,0 +1,5 @@
+2014-07-28T13:30:54+03:00
+Script name: /impalashuttle/calender/index.php
+MySQL error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Query string: SELECT events_drivers_id,drivername,driverbgcolor FROM events_drivers WHERE eventid=6645 AND taskdate='2014-07-21' ORDER BY 
+

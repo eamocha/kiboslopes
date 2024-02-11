@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Calender Installation and Configuration Guide</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<link rel="shortcut icon" href="lcal.ico"/>
+<style type="text/css">
+* {padding:0; margin:0;}
+body {
+	font: 12px arial, helvetica, sans-serif;
+	background: #E0E0E0;
+	color: #2B3856;
+}
+a {text-decoration:none; cursor:pointer;}
+h1 {font-size:18pt; text-shadow:grey 0.2em 0.3em 0.2em;}
+h3 {margin:20px 0 10px 0; font-size:14pt;}
+h4 {margin:30px 0 6px 0; font-size:12pt;}
+h5 {margin:15px 0 0 0; font-size:10pt;}
+h6 {margin:10px 0 0 0; font-size:9pt;}
+p { margin:6px 0; }
+ul, ol {margin:0 20px;}
+ol ol {list-style-type:lower-alpha;}
+code {display:table; line-height:1.5; background:#FFFFFF;}
+.top {background:#F2F2F2;	padding:10px;}
+.floatR {float:right;}
+.center {text-align:center;}
+.marginLR {margin:0 40px;}
+.redFlag {color:#DD3300;}
+.footLB {font:italic bold 1.1em arial,sans-serif; color:#0033FF;}
+.footLR {font:italic bold 1.1em arial,sans-serif; color:#AA0066;}
+.navBar {
+	width:100%;
+	background:#AAAAFF;
+	padding:2px 10px;
+	border-top:1px solid #808080;
+	border-bottom:1px solid #808080;
+	line-height:20px;
+	vertical-align:middle;
+}
+.endBar {
+	clear:left;
+	background:#AAAAFF;
+	padding:0px 10px;
+	text-align:right;
+	border-top:1px solid #808080;
+	border-bottom:1px solid #808080;
+	font-size:0.8em;
+}
+.content {padding:10px;}
+</style>
+</head>
+
+<body>
+<div class="top">
+<h5 class="floatR">a bluerange product</h5>
+<h1>Bluerange Event calendar</h1>
+</div>
+<div class="navBar">&nbsp;</div>
+<div class="content marginLR">
+
+<h3 class="center">Installation Guide</h3>
+<!--
+<br>
+<center><h4 class="redFlag">THIS IS NOT THE LATEST VERSION OF Bluerange</h4></center>
+<center><h4 class="redFlag">FOR THE LATEST VERSION GO TO <a href="http://www.calender.eu">calender</a></h4></center>
+<br>
+-->
+<h4>Table of Content</h4>
+<ol style="margin:0 40px">
+<li><p><a href="#lbl-1">Installation of Updates</a></p></li>
+<li><p><a href="#lbl-2">New Installation</a></p>
+<ol>
+<li><p><a href="#lbl-2a">Requirements</a></p></li>
+<li><p><a href="#lbl-2b">Installation Steps</a></p></li>
+<li><p><a href="#lbl-2c">My Calendar doesn't Work</a></p></li>
+</ol></li>
+<li><p><a href="#lbl-3">Calendar Configuration Variables</a></p>
+<ol>
+<li><p><a href="#lbl-3a">Bluerange Version Number and Database Credentials</a></p></li>
+<li><p><a href="#lbl-3b">Calendar Settings</a></p></li>
+<li><p><a href="#lbl-3c">Installing Automatic Periodic Functions</a></p></li>
+<li><p><a href="#lbl-3d">Installing a New Language</a></p></li>
+</ol></li>
+<li><p><a href="#lbl-4">Managing the Calendar</a></p>
+<ol>
+<li><p><a href="#lbl-4a">Event Categories</a></p></li>
+<li><p><a href="#lbl-4b">Calendar Users</a></p></li>
+<li><p><a href="#lbl-4c">Calendar Database</a></p></li>
+<li><p><a href="#lbl-4d">CSV File Import</a></p></li>
+<li><p><a href="#lbl-4e">iCal File Import/Export</a></p></li>
+<li><p><a href="#lbl-4f">Calendar Settings</a></p></li>
+</ol></li>
+<li><p><a href="#lbl-5">Adding the Calendar to an Existing Web Page</a></p>
+<ol>
+<li><p><a href="#lbl-5a">Link to the Calendar</a></p></li>
+<li><p><a href="#lbl-5b">Add a Sidebar with Upcoming Events</a></p></li>
+<li><p><a href="#lbl-5c">Embed a Mini Calendar</a></p></li>
+<li><p><a href="#lbl-5d">Embed the Full Calendar</a></p></li>
+<li><p><a href="#lbl-5e">Embed One Specific Calendar View Without Navigation Bar</a></p></li>
+<li><p><a href="#lbl-5f">Single Sign On (SSO)</a></p></li>
+</ol></li>
+</ol>
+<br>
+
+<a id="lbl-1"></a><h4>1. Installation of Updates</h4>
+<p>To upgrade to a new version of the Bluerange Event Calendar follow the
+instructions in the file &quot;<kbd>release_notes_Bluerange_xxx.html</kbd>&quot;
+(where xxx indicates the release).</p>
+
+<a id="lbl-2"></a><h4>2. New Installation</h4>
+
+<a id="lbl-2a"></a><h5>a. Requirements</h5>
+<p>For the installation of the Bluerange Event Calendar on the server of your hosting provider, you will need:</p>
+<ul>
+<li><p>A web accessible directory on a web server to install the Bluerange files.</p></li>
+<li><p>The web server should be able to run PHP-scripts (PHP 5.1 or higher).</p></li>
+<li><p>A MySQL database on the web server to store the Bluerange Event Calendar data.</p></li>
+</ul>
+
+<a id="lbl-2b"></a><h5>b. Installation Steps</h5>
+<p>To install the Bluerange Event Calendar on the server of your hosting provider, follow the next steps:</p>
+<ul>
+<li><p>Create a MySQL database on the server to store the Bluerange calendar data. Ask your hosting provider
+	if they provide a tool for you to do this.</p>
+	<p>For later use, remember the name of the database server (host name), the database name and the
+	username and password to access the database.</p></li>
+<li><p>Uncompress the downloaded Bluerange zip-file in a temporary location and upload all files and
+	directories to a Web accessible directory on the server where you wish to install Bluerange.</p></li>
+<li><p>With your Web browser browse to the directory of the Bluerange installation; it should redirect you to the
+	<kbd>install.php</kbd> script and show the Installation page.</p></li>
+<li><p>On the Installation page enter the database details and the administrator name, e-mail address
+	and password and click &quot;Install.&quot;  The script will generate the necessary tables in the
+	database and saves a file called <kbd>lcaldbc.dat</kbd> in the calendar's root directory with your Bluerange version
+	number and the encrypted database credentials.</p></li>
+<li><p>Launch the calendar by browsing to the calendar's URL to ensure the calendar displays properly.</p></li>
+<li><p>Keep a backup copy of the <kbd>lcaldbc.dat</kbd> file. It contains the Bluerange version number and the
+	encrypted parameters for the MySQL database.</p></li>
+</ul>
+
+<a id="lbl-2c"></a><h5>c. My Calendar doesn't Work</h5>
+<p>The two most frequent problems are:</p>
+<ul>
+<li><p>The calendar shows a blank page. Most of the time this problem is caused by the fact that the
+	calendar cannot connect to the MySQL database.</p></li>
+<li><p>When logging in as administrator, your name is not displayed at the right top of the window;
+	instead it reads 'Public View'. This problem occurs when 'sessions' are not enabled, or not working,
+	in the PHP installation on your server. This problem also occurs when cookies are not enabled in
+	your browser.</p></li>
+</ul>
+<p>On the <a href="http://www.bluerange-ke.com">Download Page</a> of the calender site
+	you can download the Bluerange configuration tool which can be used to check if your Bluerange calendar
+	installation is ready for use or to further analyse above problems.</p>
+
+<a id="lbl-3"></a><h4>3. Calendar Configuration Variables</h4>
+
+<a id="lbl-3a"></a><h5>a. Bluerange Version Number and Database Credentials</h5>
+<p>During the Bluerange installation process a file called <kbd>lcaldbc.dat</kbd> is created and stored in
+the root directory of the calendar. If, when launching the calendar, the file <kbd>lcaldbc.dat</kbd> is
+not present in the calendar root directory, it is assumed the calendar has not yet been installed and
+consequently the calendar's installation script will be started.</p>
+<p>The file <kbd>lcaldbc.dat</kbd> contains the following three lines:</p>
+<ol>
+<li><p>The text "Bluerange".</p></li>
+<li><p>The version number of the Bluerange installation. For example "2.7.2". This version number is used
+		by the calendar to check if the current calendar installation is up-to-date with the installed
+		calendar files and to determine if the upgrade script should be run.</p></li>
+<li><p>The following database credentials in encrypted form:</p>
+<ul>
+<li><p><kbd>host name:</kbd> This is the name of the database server and is often called "localhost".</p></li>
+<li><p><kbd>user name:</kbd> The database user name is the user name required to connect to the
+		database. This user name was chosen when the database was created on the server of your ISP. Note:
+		This user name should not be confused with the admin's user name to log in to the calendar!</p></li>
+<li><p><kbd>password:</kbd> The database password is the password required to connect to the
+		database. This password was chosen when the database was created on the server of your ISP. Note:
+		This password should not be confused with the admin's password to log in to the calendar!</p></li>
+<li><p><kbd>database name:</kbd> This is the name of the database on the database server which will
+		be used by the Bluerange calendar to store all its data. The calendar data is stored in the following
+		tables: <kbd>events</kbd>, <kbd>users</kbd>, <kbd>categories</kbd> and <kbd>settings</kbd>.</p></li>
+<li><p><kbd>table prefix:</kbd> If not blank, this variable is used as a prefix for the database table
+		names. This may be useful if you are short of databases and want to share the database with other
+		applications, or if you want to use several separate Bluerange calendars. The prefix could for
+		instance be <kbd>lc1_</kbd> or <kbd>db1_</kbd>, etc.</p></li>
+</ul>
+</li>
+</ol>
+
+<a id="lbl-3b"></a><h5>b. Calendar Settings</h5>
+<p>The calendar settings which are automatically generated during the installation process are stored in
+the <kbd>settings</kbd> table of the database. All settings can be changed at a later stage by the
+calendar administrator via the Settings page in the drop down menu on the navigation bar at the top
+right corner of the screen.</p>
+<p>For those interested in technical details: The following are explanations of the PHP variables stored
+in the <kbd>settings</kbd> table of the database:</p>
+<ul>
+<li><p><kbd>calendarTitle</kbd>: The title of the Bluerange calendar that is displayed in the header
+		of the various calendar views.</p></li>
+<li><p><kbd>calendarUrl</kbd>: The URL address of the calendar, used for notification purposes.</p></li>
+<li><p><kbd>calendarEmail</kbd>: The sender's e-mail address ("From") in emails sent by the calendar.
+		E.g. reminders, cron job summary reports. See also <kbd>notifSender</kbd> below.</p></li>
+<li><p><kbd>timeZone</kbd>: Your local time zone. See the <a href="http://us3.php.net/manual/en/timezones.php">
+		PHP Supported Timezones</a> for possible values. Setting the correct time zone is important for the
+		"today" indication in the various views and when the "notification" feature is used.</p></li>
+<li><p><kbd>chgEmailList</kbd>: A list with destination email addresses for calendar changes sent by
+		the <kbd>sendchg.php</kbd> script. Automatic periodic functions should be installed (see below).</p></li>
+<li><p><kbd>chgNofDays</kbd>: The number of days the <kbd>sendchg.php script</kbd> (see previous variable)
+    should look back for calendar changes. If the automatic periodic functions have been installed
+		(see below), this variable could be set to 1 (one day)</p></li>
+<li><p><kbd>notifSender</kbd>: When the calendar sends reminder emails, the sender field of the email
+    can contain either the calendar email address, or the email address of the user who created the
+    event. In case of the user email address, the receiver can reply to the email.</p></li>
+<li><p><kbd>adminCronSum</kbd>: Specifies whether the calendar administrator will receive a summary
+    report after the periodic functions have been executed. Automatic periodic functions should be
+		installed (see below) and emailing cron job output should be enabled on the server.</p></li>
+<li><p><kbd>details4All</kbd>: If enabled: event details will be visible to the owner of the event and
+		to all other users; if disabled: event details will only be visible to the owner of the event and
+		to users with 'post all' rights.</p></li>
+<li><p><kbd>rssFeed</kbd>: If enabled: RSS feed links will be displayed in the calendar footer and will
+		be incuded in the HTML head section.</p></li>
+<li><p><kbd>eventExp</kbd>: The number of days after the event's due date when an event expires and
+		will be automatically deleted (0:never). This function works via a cron job.</p></li>
+<li><p><kbd>cookieExp</kbd>: Number of days before a 'Remember me' cookie - set during Login - expires</p></li>
+<li><p><kbd>userMenu</kbd>: Specifies whether the user filter is displayed in the calendar's options
+		panel. Possible values: 0 = disabled, 1 = enabled.</p></li>
+<li><p><kbd>catMenu</kbd>: Specifies whether the event category filter is displayed in the calendar's
+		options panel. Possible values: 0 = don't display the category filter menu, 1 = display
+		the category filter menu.</p></li>
+<li><p><kbd>langMenu</kbd>: Specifies whether the calendar users are allowed to select their preferred
+		user interface language the calendar's options panel. Possible values: 0 = don't display the
+		language selection menu, 1 = display the language selection menu.</p></li>
+<li><p><kbd>defaultView</kbd>: The initial calendar view to be displayed when the Bluerange Calendar
+		is started. Possible values/views: 1 = Year, 2 = Full Month, 3 = Work Month, 4 = Full Week,
+		5 = Work Week, 6 = Day (today), 7 = Upcoming events and 8 = Changes.</p></li>
+<li><p><kbd>language</kbd>: The default user interface language. Only installed languages can be
+		specified.</p></li>
+<li><p><kbd>selfReg</kbd>: Indicates whether users can register themselves via the Log-in page.
+		Possible values: 0 = self-registration disabled, 1 = self-registration enabled.</p></li>
+<li><p><kbd>selfRegPrivs</kbd>: The access rights for self-registered users. Possible values: 1 = view,
+		2 = post self (post events and edit own events), 3 = post all (post events and edit own and other
+		user's events).</p></li>
+<li><p><kbd>selfRegNot</kbd>: Indicates whether a notification should be sent to the admin when a user
+		has self-registered. Possible values: 0 = disabled, 1 = enabled.
+<li><p><kbd>maxNoLogin</kbd>: Indicates after how many 'no-login' days a user account should be
+		automatically deleted. Possible values: 0 = never delete a user account, 1 - 365 = number of days.
+		Automatic periodic functions should be installed (see below).</p></li>
+<li><p><kbd>miniCalView</kbd>: The calendar view for the Bluerange mini calendar. Possible values/views:
+		1 = Full Month, 2 = Work Month, 3 = Full Week, 4 = Work Week.</p></li>
+<li><p><kbd>miniCalPost</kbd>: Indicates whether events can be added, edited and deleted via the mini
+		calendar without opening the full calendar.
+		Possible values: 0 = posting of events disabled, 1 = posting of events enabled. The default value
+		is 0.</p></li>
+<li><p><kbd>miniCalHBox</kbd>: Indicates whether an overlay with events details should pop up when the
+		user hovers an event square in the mini calendar.
+		Possible values: 0 = disabled, 1 = enabled. The default value is 1.</p></li>
+<li><p><kbd>sideBarHBox</kbd>: Indicates whether an overlay with events details should pop up when the
+		user hovers an event in the sidebar (0: no, 1: yes).</p></li>
+<li><p><kbd>showLinkInSB</kbd>: Specifies whether URL-links, from the description field of the events,
+		should be shown in the sidebar (0: no, 1: yes).</p></li>
+<li><p><kbd>sideBarDays</kbd>: The number of days to look ahead in the sidebar. The
+		default value is 14 (two weeks).</p></li>
+<li><p><kbd>yearStart</kbd>: The start month in year view (1-12 or 0, 0: current month).</p></li>
+<li><p><kbd>colsToShow</kbd>: The number of months to show per row in year view.</p></li>
+<li><p><kbd>rowsToShow</kbd>: The number of 4-months rows to show in year view. The default value is
+		4.</p></li>
+<li><p><kbd>weeksToShow</kbd>: The number of weeks to show in month view. The value 0 (zero) has a
+		special meaning and will result in the display of just one single full month. The default value
+		is 10.</p></li>
+<li><p><kbd>workWeekDays</kbd>: A string of numbers which specify the days of the week to show in
+		work month view and work week view. Valid day numbers are: 1 = Monday, 2 = Tuesday, ... , 7 =
+		Sunday.</p></li>
+<li><p><kbd>lookaheadDays</kbd>: The number of days to look ahead in upcoming view, todo list and RSS
+		feeds. The default value is 14 (two weeks).</p></li>
+<li><p><kbd>dwStartHour</kbd>: The start of the full time block on the day and week views. The default
+		value is 6 (corresponding to 6:00am). This parameter helps to avoid wasting space for the nightly
+		hours, where normally no, or very few, events are planned.</p></li>
+<li><p><kbd>dwEndHour</kbd>: The end of the full time block on the day and week views. The default
+		value is 18 (corresponding to 18.00/6:00pm). This parameter helps to avoid wasting space for the
+		nightly hours, where maybe no, or very few, events are planned.</p></li>
+<li><p><kbd>dwTimeSlot</kbd>: The time slot size (in minutes) in day/week view. Together with the
+		<kbd>dwStartHour</kbd> (see above) this value determines the number of rows in day/week view.</p></li>
+<li><p><kbd>dwTsHeight</kbd>: The time slot display height (in number of pixels) in day/week view.
+		</p></li>
+<li><p><kbd>eventHBox</kbd>: Indicates whether an overlay with events details should pop up when the user
+		hovers an event square in Year view or an event title in Month, Week or Day view.
+		Possible values: 0 = disabled, 1 = enabled. The default value is 1.</p></li>
+<li><p><kbd>showAdEd</kbd>: Specifies whether the date/user added/edited of an event should be shown in
+		the hoverbox in the various views, in the Upcoming Events view, in the Changes view and in email
+		notification messages.</p></li>
+<li><p><kbd>showCatName</kbd>: Specifies whether the event category name should be displayed for the
+		events in various views (0: no, 1: yes)</p></li>
+<li><p><kbd>showLinkInMV</kbd>: Specifies whether URL-links, specified in the description field of the
+		events, should be shown in month view (0: no, 1: yes)</p></li>
+<li><p><kbd>eventColor</kbd>: Specifies whether events should be displayed with the event owner color,
+		or with the event category color (0: owner color, 1: category color)</p></li>
+<li><p><kbd>dateFormat</kbd>: Text string defining the format of dates in dd, mm and yyyy.
+		Possible characters: y: yyyy, m: mm, d: dd and any non-alphanumeric as separator.</p></li>
+<li><p><kbd>MdFormat</kbd>: Text string defining the format of dates in dd and month.
+		Possible characters: d: dd, M: month in letters and any non-alphanumeric as separator.</p></li>
+<li><p><kbd>MdyFormat</kbd>: Text string defining the format of dates in dd, month and yyyy.
+		Possible characters: d: dd, M: month in letters, y: yyyy and any non-alphanumeric as separator.</p></li>
+<li><p><kbd>MyFormat</kbd>: Text string defining the format of dates in month and yyyy.
+		Possible characters: M: month in letters, y: yyyy and any non-alphanumeric as separator.</p></li>
+<li><p><kbd>DMdFormat</kbd>: Text string defining the format of dates in weekday, dd and month.
+		Possible characters: WD: weekday in text, d: dd, M: month in letters and any non-alphanumeric
+		as separator.</p></li>
+<li><p><kbd>DMdyFormat</kbd>: Text string defining the format of dates in weekday, dd, month and yyyy.
+		Possible characters: WD: weekday in text, d: dd, M: month in letters, y: yyyy and
+		any non-alphanumeric as separator.</p></li>
+<li><p><kbd>timeFormat</kbd>: Text string defining the format of times in hh and mm.
+		Possible characters: h: hours, m: minutes, a: am/pm (optional), A: AM/PM (optional) and
+		any non-alphanumeric as separator.</p></li>
+<li><p><kbd>weekStart</kbd>: The first day of the week. Possible values: 0 = Sunday, 1 = Monday.
+<li><p><kbd>weekNumber</kbd>: Specifies whether week numbers should be displayed in the various
+		calendar views. Possible values: 0 = disabled, 1 = enabled. The default value is 1.</p></li>
+</ul>
+
+<a id="lbl-3c"></a><h5>c. Installing Automatic Periodic Functions</h5>
+<p>The following automatic periodical functions are available:</p>
+<ul>
+<li>Email notification messages for event due dates</li>
+<li>Daily email messages with calendar changes</li>
+<li>Automatic deletion of expired events</li>
+<li>Automatic deletion of expired (unused) user accounts</li>
+</ul>
+<p>To make the automatic periodical functions work, a cron job needs to be created on the server (or
+on an external server), which executes the file <kbd>lcalcron.php</kbd>, in the root directory of the
+calendar, daily at approx. 2:00am. For cron job details see the header of the <kbd>lcalcron.php</kbd>
+file.</p>
+<p>If you are not familiar with cron jobs, ask your hosting provider for help.</p>
+
+<h6>- The Email Notification Feature</h6>
+<p>For events entered in the calendar the user can choose to receive an email reminder (notification)
+one or several days before the event is due. When chosen, for recurring events (e.g. birthdays) an email
+notification will be sent to the user the selected number of days before each occurrence of the event.
+Imagine: never forget to buy flowers for your (girl)friend's birthday anymore!</p>
+<h6>- Receiving Calendar Changes by Email</h6>
+<p>In a multi-user environment it could be useful to be aware of changes being applied to the calendar
+content, i.e. a list with events added, edited and deleted. Such a list can be called up via the
+options panel. It is however also possible to have a list with changes automatically sent daily to one
+or more email addresses.</p>
+<p>Via the Settings page the administrator can specify the number of days to look back for changes and
+a list with email addresses. If the number of days to look back for changes is set to 0 (zero), no
+emails with changes will be sent.</p>
+<h6>- Automatic Deletion of Expired Events</h6>
+<p>Events which due date has past can automatically be deleted. Via the Settings page the administrator
+can specify the number of days after an event's due date when an event will automatically be deleted.
+If the number of days is set to 0 (zero), no events will be deleted.</p>
+<p>Note: deleted events are flagged "deleted"; definitively removing deleted events from the database
+is done via the admin's Database page. </p>
+<h6>- Automatic Deletion of Expired (unused) User Accounts</h6>
+<p>The account of users who have not logged in during a certain number of days can automatically be
+deleted. Via the Settings page the administrator can specify the number of 'no login' days after which
+the user account will be deleted. If the number of 'no login' days is set to 0 (zero), no user accounts
+will be deleted.</p>
+<p>This function can be particularly useful when users are allowed to self-register (this feature can
+be switched on/off on the admin's Settings page).</p>
+
+<a id="lbl-3d"></a><h5>d. Installing a New Language</h5>
+<p>= Note: in the following text the part {language} (including the braces) of the file names represents
+		the name of the relevant language. =</p>
+<p>A new language for the user interface of the Bluerange calendar can be installed as follows:</p>
+<ul>
+<li>Download and unzip the desired language pack from the calender site.
+<p>If your language pack is not available:</p>
+<ul>
+<li><p>translate the files <kbd>lang/ai-english.php</kbd> and <kbd>lang/ui-english.php</kbd> (translate
+		the texts to the right of the => signs) and save the files with the names <kbd>ai-{newlang}.php</kbd>
+		and <kbd>ui-{newlang}.php</kbd> respectively.<br>
+		Use character encoding <strong>utf-8 without BOM</strong> (see note below).</p></li>
+<li><p>translate the file <kbd>lang/ug-english.php</kbd> (leave the html tags unchanged) and save it with
+		the name <kbd>ug-{newlang}.php</kbd>.<br>
+		Use character encoding <strong>utf-8 without BOM</strong> (see note below).</p></li>
+</ul>
+</li>
+<li><p>upload the files <kbd>ai-{newlang}.php</kbd>, <kbd>ui-{newlang}.php</kbd> and
+		<kbd>ug-{newlang}.php</kbd> to the <kbd>lang/</kbd> directory on the server.</p></li>
+<li><p>on the Settings page (see Calendar Configuration Settings in Section 4 below), change the user
+		interface language in the Calendar Settings to the new language.</p></li>
+<li><p>if the user interface language menu is displayed in the calendar's options panel, the new installed
+		language will automatically be added to the menu.</p></li>
+</ul>
+<p><b>IMPORTANT NOTE:</b> When using special characters (e.g. accents) in the language files, the ui and
+		ug files can best be saved with character encoding: <kbd>utf-8 without BOM</kbd> (BOM = Byte Order Mark).
+		If your text editor does not support <kbd>utf-8 without BOM</kbd>, you can download and use Notepad++
+		(<a href="http://notepad-plus.sourceforge.net/uk/site.htm">Notepad++ on Sourceforge</a>). This is an 
+		excellent text edotor and it's free!</p>
+
+<a id="lbl-4"></a><h4>4. Managing the Calendar</h4>
+<p>Managing the Bluerange calendar is the responsibility of the calendar administrator, who has all calendar
+		access rights.</p>
+<p>In order to define users, to set up categories for the calendar, to change configuration settings and
+		to add events, you must select Log In in the navigation bar at the top right corner of the screen.
+		Enter the administrator name or email address and password you specified during the installation,
+		and log in. On the right side of the navigation bar the administrator drop down menu will be
+		displayed.</p>
+
+<a id="lbl-4a"></a><h5>a. Event Categories</h5>
+<p>A good place to start in managing your calendar is to create a number of categories for your events, each
+		with its own color. Adding categories with different colors - though not required - will greatly enhance
+		the views of the calendar. Categories can be for example: meeting, important, holiday, birthday, etc.</p>
+<p>The initial installation has only one category which is named "no cat". To manage categories, select
+		Categories in the administrator drop down menu. This takes you to a page with a list of all categories
+		where you can add new categories and edit or delete current categories.</p>
+<p>When adding / editing events the defined categories can be selected from a pull down list. The order in
+		which categories are displayed in the pull down list is determined by the Sequence field on the
+		Categories page.</p>
+<p>The field Repeat can be used to pre-define recurring events. A category "birthday" or "anniversary" can
+		be set to repeat every year. If a repeat value is specified, all events defined in this category will
+		repeat as specified. The repeat value specified here will overrule possible user 'repeat' settings.</p>
+<p>The checkbox "Public" can be unchecked to exclude certain event categories from being viewed by the
+		"Public User" and from the RSS feeds.</p>
+<p>One or two check marks can be activated which will be displayed in front of the event title for all
+		events in this category. The user can use these check marks to flag events, for example, as "approved"
+		or "completed"</p>
+<p>The fields Text Color and Background define the colors used to display events in the calendar assigned
+		to this category.</p>
+
+<a id="lbl-4b"></a><h5>b. Calendar Users</h5>
+<p>The Users menu in the navigation bar allows the calendar administrator to add and edit users, their
+		rights for using Bluerange and their user interface language. There are two main areas that can be edited,
+		i.e. the name / e-mail address / password area and the access rights area. Possible access rights are:
+		&quot;View&quot;, &quot;Post Own&quot;, &quot;Post All&quot; and &quot;Admin&quot;. It is important to
+		use a valid email address for each user to be able to receive email notifications of due dates of
+		events. For each user the default user-interface language can be specified. Whenever a user logs
+		in, the user-interface language will be set to this language.</p>
+<p>The initial installation has two users defined. One is the Public Access user, who initially has "view" access
+		and the other is the calendar administrator, with the administrator name, email address and password
+		specified during the installation. The administrator has all access rights.</p>
+<p>Unless the calendar administrator has given &quot;View&quot; access to Public Access users, users must log
+		in to use the calendar using their name or email address and password. Depending on the type of user,
+		a user can have different access rights which can be set by the calendar administrator.</p>
+		<p>If the administrator has enabled, on the Settings page, user self-registration, users can register
+		themselves via the Login page. Self-registered users have the access rights specified by the administrator
+		on the Settings page.</p>
+
+<a id="lbl-4c"></a><h5>c. Calendar Database</h5>
+<p>The Database menu in the navigation bar allows the calendar administrator to start the following functions:</p>
+<ul>
+<li><p>check and repair the database.</p>
+<p>This function checks the 'event' table and the 'dates' table of the database on inconsistencies and, when
+found, repairs the inconsistencies. The number of inconsistencies found is indicated for each table.</p></li>
+<li><p>compact database</p>
+<p>During normal use of the calendar, when deleting events, the event records are not physically deleted from
+the database, but are marked as 'deleted'. They can still be used in views and reports; for example in the
+Changes view.
+The compact database function permanently removes events from the database which have been marked as
+'deleted' longer 30 days ago. Thereafter all tables are compressed to free unused space and to reduce
+database overhead.</p></li>
+<li><p>backup database</p>
+<p>This function creates a backup of the structure and contents of all database tables in the <kbd>files/</kbd>
+directory. The file name is <kbd>cal-backup-yyyymmdd-hhmmss.sql</kbd> (where 'yyyymmdd' = year, month, and
+day, and hhmmss = hour, minutes and seconds). The file type is <kbd>.sql</kbd> and the created file can
+directly be used to re-create the database tables structure and contents, for instance by importing the
+file in the phpMyAdmin tool which is available on the server of most web hosts.</p></li>
+</ul>
+
+<a id="lbl-4d"></a><h5>d. CSV File Import</h5>
+<p>CSV (Comma Separated Values) text files with event data can be imported into the Bluerange calendar. This
+		function can for instance be used to import a CSV file with event data exported by MS Outlook. The dialogue
+		to import CSV files is opened by selecting CSV Import from the admin drop-down menu in the navigation bar.</p>
+<p>The CSV file contains one line per event and each line contains a number of fields each separated by a comma
+		(or any other unique character). The order of the fields in each line of the CSV file is: title, venue,
+		category id, date, end date, start time, end time and description. The first line of the CSV file is ignored
+		by the import function and can be used for column descriptions (default in MS Outlook exports).</p>
+<p>Sample CSV files - with different date/time formats - can be found in the <kbd>files/</kbd> directory of the
+		Bluerange Calendar installation and have the file extension ".csv".</p>
+
+<a id="lbl-4e"></a><h5>e. iCal File Import/Export</h5>
+<p>Events from iCalendar files can be imported into the Bluerange calendar. The content of the iCal file to be
+		imported must meet the [<u><a href='http://tools.ietf.org/html/rfc5545' target='_blank'>RFC5545
+		standard</a></u>] of the Internet Engineering Task Force. The Bluerange calendar can also export events
+		into an iCal file which can be downloaded by the calendar administrator. The dialogue to import/export
+		iCal files is opened by selecting iCal Import / iCal export from the admin drop-down menu in the
+		navigation bar.</p>
+		<p>This function can for instance be used to back up the events of your Bluerange calendar, or to exchange
+		events with other calendars, e.g. to import public holidays available in iCal format on the internet.
+		Please note that some Bluerange event fields are not supported in the iCal format (e.g. private event, notify,
+		email addresses) and consequently are not copied to the iCal file. Some iCal event repetition rules are not
+		supported by the Bluerange calendar; these events will be displayed and earmarked as such, but will not be
+		added to the calendar.</p>
+	<p>Various sample iCal files can be found in the <kbd>files/</kbd> directory of the Bluerange Calendar
+		installation and have the file extension ".ics".</p>
+
+<a id="lbl-4f"></a><h5>f. Calendar Settings</h5>
+<p>The Settings page in the administrator's menu on the navigation bar can be used to easily change the
+		calendar's configuration settings which are stored in the <kbd>settings</kbd> table of the database
+		(see section 3 above).
+		These settings, for instance, define the calendar title, the time zone, the language file to be used for
+		the user interface, the default initial view when the calendar is started, the number of weeks/months
+		displayed in the various views, the date and time format, etc.</p>
+<p>IMPORTANT: Currently the TimeZone is set to &quot;Europe/Amsterdam&quot;. If you are in a different time
+		zone, change the TimeZone to your local time zone. See the
+		<a href="http://us3.php.net/manual/en/timezones.php">PHP Supported Timezones</a> for possible values.</p>
+
+<a id="lbl-5"></a><h4>5. Adding the Calendar to an Existing Web Page</h4>
+<p>To use the calendar on an other web site, the following possibilities are available:</p>
+<ul>
+<li><p>link to the calendar's URL, which will open the calendar in a new page.</p></li>
+<li><p>Add an Upcoming Events Sidebar. This light-weight list shows all public events for the coming x days.</p></li>
+<li><p>embed a mini calendar, which can be used to view events and - if enabled by the admin - add, edit
+and delete events.</p></li>
+<li><p>embed the full calendar with navigation bar, which the visitor can use to change the options the
+calendar.</p></li>
+<li><p>embed one specific calendar view without navigation bar. The visitor cannot navigate to other views
+and cannot change the options of the calendar</p></li>
+</ul>
+<a id="lbl-5a"></a><h5>a. Link to the Calendar</h5>
+<p>To link to the Bluerange calendar in an existing web page and open it in a new window, the following HTML
+code can be used:</p>
+<code>&lt;a href="http://www.mycalsite.xx/Bluerange/" target="_blank"&gt;Go To My Calendar&lt;/a&gt;</code>
+<a id="lbl-5b"></a><h5>b. Add a Sidebar with Upcoming Events</h5>
+<p>A sidebar with public upcoming events for the coming x days can be added to your web page. The sidebar
+is placed in a &lt;div&gt;-tag container, can be placed at any location and is fully customizable. An example
+is shown on the Bluerange Demo page of the calender web site. The sidebar can be added to your web page by adding
+the following lines of code to the &lt;head&gt;-section of your web page:</p>
+<code>&lt;link rel="stylesheet" type="text/css" href="mycalendarfolder/css/css_sbar.php"&gt;</code>
+<code>&lt;script src="mycalendarfolder/common/toolbox.js"&gt;&lt;/script&gt;</code>
+<p>and adding the following lines of code to the body of your web page:</p>
+<code>&lt;?php</code>
+<code>$sbClass = {sidebar class}; (optional)</code>
+<code>$sbHeader = {sidebar title}; (optional)</code>
+<code>$sbCatsIn = {list of categories to include}; (optional)</code>
+<code>$sbCatsEx = {list of categories to exclude}; (optional)</code>
+<code>$sbUsersIn = {list of users to include}; (optional)</code>
+<code>$sbUsersEx = {list of users to exclude}; (optional)</code>
+<code>include './mycalendarfolder/lcsbar.php';</code>
+<code>?&gt;</code>
+<p>Explanation of the lines of code:</p>
+All parameters indicated by {....}, including the braces, are text strings between single or double quotes.
+<ul>
+<li><kbd>&lt;?php</kbd>: start PHP and <kbd>?&gt;</kbd>: end PHP. If the lines of code are added to a PHP section,
+these PHP-tags can be omitted.</li>
+<li><kbd>$sbClass</kbd>: This is the class of the container &lt;div&gt;-tag which is used in the CSS to define the style
+for the sidebar container. This line of code is optional and will default to 'sideBar'. The styles for 'sideBar'
+are defined in the file <kbd>css/css_sbar.php</kbd> of your calendar installation. </li>
+<li><kbd>$sbHeader</kbd>: The title of the sidebar. This line of code is optional. If not specified, the title of the
+sidebar will be taken from the language files.</li>
+<li><kbd>$sbCatsIn</kbd>: This is a list with one or more IDs of the event categories that should be included in the
+sidebar. IDs should be separated by commas. This line of code is optional. If not specified, all event
+categories will be included.</li>
+<li><kbd>$sbCatsEx</kbd>: This is a list with one or more IDs of the event categories that should be excluded from the
+sidebar. IDs should be separated by commas. This line of code is optional. If not specified, no event
+categories will be excluded. If $sbCatsIn has been specified, this line of code will be ignored.</li>
+<li><kbd>$sbUsersIn</kbd>: Same as $sbCatsIn, but for calendar users.</li>
+<li><kbd>$sbUsersEx</kbd>: Same as $sbCatsEx, but for calendar users.</li>
+<li><kbd>include</kbd>: At this place the sidebar will be included.</li>
+</ul>
+<p>In the above lines of code you should replace <kbd>mycalendarfolder</kbd> by the name of the root directory of your 
+calendar installation.</p>
+<p>The file <kbd>css_sbar.php</kbd> contains the default style for the sidebar container &lt;div&gt;, which should be
+tailored to your needs. In the same file you can customize the style, colors, fonts, etc. of the sidebar content.
+The title of the sidebar can be set per sidebar and the events in the sidebar can be filtered on event
+category ID and/or user ID. This allows for more than one sidebar per site, each with its own title and a
+different list of upcoming events.</p>
+<p>Example of two sidebar definitions for the same website which are complementary:</p>
+<code>&lt;?php</code>
+<code>$sbClass = 'sideBar1';</code>
+<code>$sbHeader = 'Birthdays/Holidays' ;</code>
+<code>$sbCatsIn = '2,4';</code>
+<code>include './mycalendarfolder/lcsbar.php';</code>
+<code>?&gt;</code>
+<code>&lt;?php</code>
+<code>$sbClass = 'sideBar2';</code>
+<code>$sbHeader = 'All other events';</code>
+<code>$sbCatsEx = '2,4';</code>
+<code>include './mycalendarfolder/lcsbar.php';</code>
+<code>?&gt;</code>
+<p>For each event the following will be displayed: date, time and title. Via the admin's Settings page, under 
+"Mini Calendar / Upcoming Events Sidebar", you can choose whether further event details should be shown in a 
+pop-up box (like in the full Bluerange calendar) when hovering an event and if URLs from the event description 
+(if any) should be displayed in the sidebar as a hyperlink. On the same Settings page you can specify the number 
+of days to look ahead for upcoming events in the sidebar.</p>
+<p>The sidebar is using the database and tools of the full calendar and therefore the full calendar should be
+present in the "mycalendarfolder" (see code above).</p>
+<a id="lbl-5c"></a><h5>c. Embed a Mini Calendar</h5>
+<p>A mini calendar with a (minimum) width of 160px can be embedded in your web site. An example is shown on
+the Bluerange Demo page of the calender web site. The mini calendar can be displayed in an inline frame (iframe)
+using the following HTML code:</p>
+<code>&lt;iframe id="lcmini" src="http://www.mysite.xx/Bluerange/lcmini.php"&gt;&lt;/iframe&gt;</code>
+<p>Via the CSS styles of your site, the id <kbd>lcmini</kbd> can be used to position and define the style of the
+iframe containing the mini calendar. The style for id <kbd>lcmini</kbd> could for instance look as follows:</p>
+<code>#lcmini { position:absolute; right:100px; top:15%; width:210px; height:233px; overflow:hidden;}</code>
+<p>If you want the height of the mini calendar to vary automatically depending on the month to display (4, 5 or
+6 weeks) you should add the following JavaScript code, which dynamically adjusts the height of the iframe, to the
+<kbd>&lt;head&gt;</kbd> section of the parent web page:</p>
+<code>
+&lt;script&gt; function setHeight(newHeight){var plus=(document.all)?8:0; document.getElementById('lcmini').style.height=newHeight+plus+'px';}&lt;/script&gt;
+</code>
+<p><b>Please note</b>: Automatic adjusting of the iframe height only works if the calendar is located in the
+same domain as the parent page. If not, the iframe height is set to cope with displaying 6 weeks.
+</p>
+<a id="lbl-5d"></a><h5>d. Embed the Full Calendar</h5>
+<p>To embed the full Bluerange calendar in an existing web page, an inline frame (iframe) can be used. This can
+for example be done with the following HTML code:</p>
+<code>&lt;iframe id="Bluerange" src="http://www.mysite.xx/Bluerange/?cP=2"&gt;&lt;/iframe&gt;</code>
+<p>With parameter <kbd>cP</kbd> the default view can be set (e.g. year: <kbd>cP=1</kbd>, month: <kbd>cP=2</kbd>, . . . ,upcoming:
+<kbd>cP=7</kbd>)<br>
+<p>Via the CSS styles of your site, the id <kbd>Bluerange</kbd> can be used to position and define the style of the
+iframe containing the Bluerange calendar. The style for id <kbd>Bluerange</kbd> could for instance look as follows:</p>
+<code>#Bluerange { width:80%; height:800px; margin:20px; border-style:solid; border-width:1px; border-color:grey; }</code>
+<a id="lbl-5e"></a><h5>e. Embed One Specific Calendar View without Navigation Bar</h5>
+<p>To embed the Bluerange calendar without navigation bar, the parameter <kbd>hdr=0</kbd> should be added to the
+URL as follows:</p>
+<code>&lt;iframe src="http://www.mysite.xx/Bluerange/?hdr=0&amp;cP=2"&gt;&lt;/iframe&gt;</code>
+<p>Without navigation bar the visitor will not be able to navigate the calendar and select other views.
+The following parameters can be added to select the view to display and the user-interface language:</p>
+<ul>
+<li><kbd>cP</kbd> to set the view (e.g. year: <kbd>cP=1</kbd>, month: <kbd>cP=2</kbd>, . . . , upcoming:
+<kbd>cP=7</kbd>)</li>
+<li><kbd>cL</kbd> to set the user-interface language (e.g. French: <kbd>cL=Francais</kbd>). The specified
+language must be present in the <kbd>lang/</kbd> directory)</li>
+</ul>
+<br>
+<p>For example the HTML code to show the Upcoming Events page without navigation bar, in the French language
+looks as follows:</p>
+<code>&lt;iframe id="Bluerange" src="http://www.mysite.xx/Bluerange/?hdr=0&amp;cP=7&amp;cL=Francais"&gt;&lt;/iframe&gt;</code>
+<p>Via the CSS styles of your site, the id <kbd>Bluerange</kbd> can be used to position and define the style of the
+iframe containing the Bluerange calendar. The style for id <kbd>Bluerange</kbd> could for instance look as follows:</p>
+<code>#Bluerange { width:80%; height:800px; margin:20px; border-style:solid; border-width:1px; border-color:grey; }</code>
+<p><b>Important:</b>
+<br>
+The parameter <kbd>hdr=0</kbd> is remembered via the PHP session mechanism; this means that if you access
+the embedded calendar without navigation bar, then thereafter, when accessing your normal (not-embedded)
+calendar when your session is still active (max. one hour) you will also see no navigation bar. This can be
+solved by adding the parameter <kbd>hdr=1</kbd> to the URL of your normal calendar.</p>
+<a id="lbl-5f"></a><h5>f. Single Sign On (SSO)</h5>
+<p>When the calendar is embedded in a PHP-based website where users have to log in, users logged in on the
+parent website can be logged in to the calendar automatically in a secure way, using PHP sessions.</p>
+<p>To achieve this the parent website scripts should:</p>
+<ul>
+<li>start PHP sessions, if not done already, by adding the following PHP statement to the parent website
+PHP script:<br><code>session_start();</code>
+PHP sessions must be started before anything is sent out to the browser (like header information), so this
+statement must be added somewhere at the start of the script.</li>
+<li>save the user name or the user email address in the session variable 'lcUser' by adding the following
+statement to the parent website PHP script at any point before the iframe statement with the calendar URL:
+<code>$_SESSION['lcUser'] = &lt;user name | user email&gt;;</code>The part <code>&lt;user name |
+user email&gt;</code> is a string with either the user name or the user email address which corresponds
+to the user name or the user email address required to log in to the calendar (specified by the admin
+when the calendar user account was created).</li>
+</ul>
+<br>
+<p>Because PHP session data are stored on the server, the user name / email address are not visible to
+the users.</p>
+</div>
+<br><h5>&nbsp;- End of Installation Guide -</h5>
+<br>
+<div class="endBar">
+	design 2012 - powered by <a href="http://www.calender.eu"><span class="footLB">blue range</span><span class="footLR">Soft</span></a>
+</div>
+<br>&nbsp;
+</body>
+</html>

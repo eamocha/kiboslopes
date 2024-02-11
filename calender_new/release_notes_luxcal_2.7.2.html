@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>calender Release Notes and Upgrade Instructions</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<link rel="shortcut icon" href="lcal.ico"/>
+<style type="text/css">
+* { padding:0; margin:0; }
+body {
+	font: 12px arial, helvetica, sans-serif;
+	background: #E0E0E0;
+	color: #2B3856;
+}
+a {text-decoration:none; cursor:pointer;}
+h1 {font-size: 18pt; text-shadow: grey 0.2em 0.3em 0.2em;}
+h3 {margin: 20px 0 10px 0; font-size: 14pt;}
+h4 {margin: 10px 0 0 0; font-size: 12pt;}
+h5 {margin: 10px 0 0 0; font-size: 11pt;}
+h6 {margin: 10px 0; font-size: 10pt;}
+ul, ol {margin: 0 20px;}
+li {margin: 10px 0;}
+.top {background: #F2F2F2;	padding: 10px;}
+.floatR {float: right;}
+.center {text-align:center;}
+.marginLR {margin: 0 40px;}
+.flag {color: #FF3300;}
+.redFlag {color: #DD3300;}
+.footLB {font:italic bold 1.1em arial,sans-serif; color:#0033FF;}
+.footLR {font:italic bold 1.1em arial,sans-serif; color:#AA0066;}
+.navBar {
+	width: 100%;
+	background: #AAAAFF;
+	padding: 2px 10px;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	line-height: 20px;
+	vertical-align: middle;
+}
+.endBar {
+	clear: left;
+	background: #AAAAFF;
+	padding: 0px 10px;
+	text-align: right;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	font-size: 0.8em;
+}
+.content {padding: 10px;}
+</style>
+</head>
+
+<body>
+<div class="top">
+<h4 class="floatR">a Bluerange product</h4>
+<h1>Bluerange Event calendar</h1>
+</div>
+<div class="navBar">&nbsp;</div>
+<div class="content marginLR">
+
+<h3 class="center">Release Notes</h3>
+<!--
+<br>
+<center><h4 class="redFlag">THIS IS NOT THE LATEST VERSION OF Bluerange</h4></center>
+<center><h4 class="redFlag">FOR THE LATEST VERSION GO TO <a href="http://www.luxsoft.eu">LUXSOFT</a></h4></center>
+<br>
+-->
+<br><h4>Installation Instructions - First Time</h4>
+<p>For first-time installations of the Bluerange Event Calendar, follow the 
+instructions in the <kbd>installation_guide.html</kbd>.</p>
+<br>
+<h4>Installation Instructions - Upgrade to a new version</h4>
+<p>To upgrade your Bluerange calendar to a new version follow the Upgrade 
+Instructions below.</p>
+<br>
+<h4>Bluerange 2.7.2 - Release date: 16.11.2012</h4>
+<h5>Upgrade Instructions</h5>
+<!--
+<h6 class="redFlag">Note: Upgrading to this Bluerange version will change the 
+structure of the MySQL database. Before going any further be sure to back up 
+your database (via the admin's Database page) and copy the backup file from the 
+<kbd>files/</kbd> directory to a safe place.</h6>
+-->
+
+<h6>Major Release</h6>
+<p>If you are upgrading from an older version, carefully follow the next steps:</p>
+<ol>
+<li>a. When upgrading from Bluerange version 2.5.3 or lower, make a backup copy of 
+		the <kbd>config.php</kbd> file located in the calendar root on the server of 
+		your hosting provider.<br>
+		b. When upgrading from Bluerange version 2.6.0 or higher, make a backup copy of 
+		the <kbd>lcaldbc.dat</kbd> file located in the calendar root on the server of 
+		your hosting provider.</li>
+<li>IMPORTANT: If you have tailored the style sheet file, the language files or
+		other files of your current calendar installation, make a backup of the 
+		file(s) concerned and apply the changes to the new file(s) after successful 
+		installation.</li>
+<li>Delete all Bluerange files and folders from the server, <span class="redFlag">
+		<b>EXCEPT THE FILE <kbd>lcaldbc.dat</kbd> (or <kbd>config.php</kbd> - see point 
+		1. above) IN THE ROOT DIRECTORY</b></span>.</li>
+<li>Download and unzip the latest version of Bluerange (file: <kbd>Bluerangexxx.zip</kbd>, 
+		where 'xxx' is the version number) and upload all files and folders to the 
+		calendar root on the server.</li>
+<li>Launch the calendar by browsing to the calendar root on the server.</li>
+<li>If the calendar is displayed successfully, delete the following files from 
+		the calendar root: <kbd>config-backup.php</kbd>, <kbd>install.php</kbd> and 
+		<kbd>upgradexxx.php</kbd> (where 'xxx' is the version number)</li>
+<li>The <kbd>lcaldbc.dat</kbd> file in the calendar root on the server has been 
+		created / changed. Save a backup copy.</li>
+</ol>
+			
+<h5>Periodically Started Functions</h5>
+<p>Note: If you periodically start calendar functions using a cron job, then as 
+of Bluerange 2.3 you only need one cron job (running daily at approx. 2 AM) which 
+starts the script <kbd>lcalcron.php</kbd> in the calendar's root directory. 
+Details on how to define a cron job can be found in the header of the file 
+<kbd>lcalcron.php</kbd>.
+Depending on the configuration settings, the <kbd>lcalcron.php</kbd> script will 
+subsequently start:</p>
+<ul>
+<li><kbd>notify.php</kbd> which takes care of sending email reminders</li>
+<li><kbd>sendchg.php</kbd> which takes care of sending calendar changes *)</li>
+<li><kbd>eventchk.php</kbd> which checks if events have expired and should be 
+deleted *)</li>
+<li><kbd>userchk.php</kbd> which checks if user accounts have expired and should 
+be deleted *)</li>
+</ul>
+<p>*) if activated on the admin's Settings page</p>
+
+<h5>Language Files</h5>
+<p>If you have translated one of the user interface language files into an other 
+language, you should be aware of the following.</p>
+<p>Each user-interface language is defined in three language files: ({lang} is 
+the name of the language)</p>
+<ul>
+<li>lang/ug-{lang}.php file: User guide for the calendar users</li>
+<li>lang/ui-{lang}.php file: User interface texts for the calendar pages</li>
+<li>lang/ai-{lang}.php file: User interface texts for the admin pages</li>
+</ul>
+<p><b>For the language files character encoding "utf-8 without BOM" (BOM = Byte 
+Order Mark) is recommended.</b></p>
+<p>All language files included in the Bluerange download are up to date with this 
+Bluerange version. However, for certain languages we could not translate the new 
+and changed texts. These texts were added / changed in English and still need to 
+be translated.</p>
+
+<h5>Change Log</h5>
+<p>The full change log can be viewed in the release notes on the Bluerange web site: 
+  <a href="http://www.bluerange-ke.com"><b><i> Forum
+	- What's New</i></b></a>.</p>
+</div>
+<br><br>
+<div class="endBar">
+	design 2012 - powered by <a href="http://www.bluerange-ke.com"><span class="footLB">Bluerange</span><span class="footLR">Kenya</span></a>
+</div>
+<br>&nbsp;
+</body>
+</html>
+
