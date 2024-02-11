@@ -248,7 +248,7 @@ function int_array2D_sort($int_array, $sort_order)
 		$lresult = mysqli_query($conn,$lquery) or die('Error in querying:' . $lquery . mysqli_error($conn)());
 		echo "load mysql time: " . (time() - $time);
 		for($li = 0; $li<mysqli_num_rows($lresult); $li++)
-			list($array[$li]) = mysql_fetch_row($lresult);
+			list($array[$li]) = mysqli_fetch_row($lresult);
 		return $array;
 	}
 	function view_file($filename)

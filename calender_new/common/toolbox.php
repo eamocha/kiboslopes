@@ -89,7 +89,7 @@ function dbConnect() {
 	if (list(,$lcc,$dbc) = file('./lcaldbc.dat',FILE_IGNORE_NEW_LINES)) { //get version + db creds
 		define("LCC",$lcc);
 
-
+ini_set('display_errors', 'On');
 		//list($dbHost,$dbName,$dbUnam,$dbPwrd,$dbPfix) = unserialize(ciph($dbc,1));
 
 		$dbHost=DB_HOST;
@@ -101,8 +101,31 @@ function dbConnect() {
 		$link = mysqli_connect($dbHost, $dbUnam, $dbPwrd);
 		if (!$link) { exit("Could not connect to the MySQL server"); }
 		if (!mysqli_select_db($link,$dbName)) { exit("Could not select the database"); }
-		//mysql_set_charset('utf8',$link); //support non-Latin char sets
+		mysqli_set_charset($link,'utf8'); //support non-Latin char sets
 		return $dbPfix; //return db table prefix
+	} else {
+		return false; //no db credentials
+	}
+}
+//retun the connection
+function dblink(){
+	if (list(,$lcc,$dbc) = file('./lcaldbc.dat',FILE_IGNORE_NEW_LINES)) { //get version + db creds
+		define("LCC",$lcc);
+
+ini_set('display_errors', 'On');
+		//list($dbHost,$dbName,$dbUnam,$dbPwrd,$dbPfix) = unserialize(ciph($dbc,1));
+
+		$dbHost=DB_HOST;
+		$dbName=DB_NAME;
+		$dbUnam=DB_USER;
+		$dbPwrd=DB_PASSWORD;
+		$dbPfix="";
+
+		$link = mysqli_connect($dbHost, $dbUnam, $dbPwrd);
+		if (!$link) { exit("Could not connect to the MySQL server"); }
+		if (!mysqli_select_db($link,$dbName)) { exit("Could not select the database"); }
+	
+		return $link; //return db table prefix
 	} else {
 		return false; //no db credentials
 	}
@@ -122,10 +145,11 @@ function getSettings() {
 //Database querying
 function dbQuery($q) {
 	global $dbPfix;
+	$link=dblink();
 	$q = str_replace ("[db]", $dbPfix, $q) ; //add database prefix
-	$rSet = mysqli_query($conn,$q);
+	$rSet = mysqli_query($link,$q) or die(mysqli_error($link));
 	if ($rSet === false) {
-		file_put_contents("./logs/mysql.log", date(DATE_ATOM)."\nScript name: ".htmlentities($_SERVER['PHP_SELF'])."\nMySQL error: ".mysqli_error($conn)()."\nQuery string: $q\n\n" , FILE_APPEND); exit("SQL error. See 'logs/mysql.log'");
+		file_put_contents("./logs/mysql.log", date(DATE_ATOM)."\nScript name: ".htmlentities($_SERVER['PHP_SELF'])."\nMySQL error: ".mysqli_error($link)."\nQuery string: $q\n\n" , FILE_APPEND); exit("SQL error. See 'logs/mysql.log'");
 	}
 	return $rSet; //result set
 }

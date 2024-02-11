@@ -30,7 +30,7 @@ if ( !defined('udf_functions') )
     {
         $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER by id";
         $result = mysqli_query($conn,$query) or die ("Error in query32: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {
             echo '<tr><td>';
             if (file_exists("udf_help.html"))
@@ -50,11 +50,11 @@ if ( !defined('udf_functions') )
                 echo '<select name="'.$row[0].'">';
                 $query = "SELECT id,value FROM ".$row[0];
                 $subresult = mysqli_query($conn,$query) or die ("Error in query52: $query. " . mysqli_error($conn)());
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
                     echo '<option value="'.$subrow[0].'">'.$subrow[1].'</option>';
                 }
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
                 echo '</select>';
             }
 
@@ -63,11 +63,11 @@ if ( !defined('udf_functions') )
             {
                 $query = "SELECT id,value FROM ".$row[0];
                 $subresult = mysqli_query($conn,$query) or die ("Error in query65: $query. " . mysqli_error($conn)());
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
                     echo '<input type=radio name="'.$row[0].'" value="'.$subrow[0].'">'.$subrow[1];
                 }
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
             }
 
             // Type is Text
@@ -87,7 +87,7 @@ if ( !defined('udf_functions') )
                 $subresult = mysqli_query($conn,$query) or die ("Error in query65: $query. " . mysqli_error($conn)());
 				echo '<select name="'.$row[0].'" onchange="showdropdowns(this.value, \'add\',\'' . $field_name . '\')">';
 					echo '<option value="">Please select</option>';
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
 					echo '<option value="'.$subrow[0].'">'.$subrow[1].'</option>';
                 }
@@ -95,13 +95,13 @@ if ( !defined('udf_functions') )
 				
 				echo '<div id="txtHint'.$field_name.'">Secondary items will show up here.</div>';
 				
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
             }
 			//CHM
 			
             echo '</td></tr>';
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_add_file_insert($fileId)
@@ -109,7 +109,7 @@ if ( !defined('udf_functions') )
         $query = "SELECT table_name,field_type FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die("Error in query86: $query . " . mysqli_error($conn)());
         $i = 0; //CHM
-        while ($row = mysql_fetch_row($result)) {
+        while ($row = mysqli_fetch_row($result)) {
             if ($row[1] == 1 || $row[1] == 2 || $row[1] == 3 || $row[1] == 4) { //CHM
                 if (isset($_REQUEST[$row[0]]) && $_REQUEST[$row[0]] != "") {
                     $explode_row = explode('_', $row[0]);
@@ -129,14 +129,14 @@ if ( !defined('udf_functions') )
                 }
             }
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_edit_file_form()
     {
         $query = "SELECT display_name,field_type,table_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die ("Error in query104: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {
             if ( $row[1] == 1 || $row[1] == 2)
             {
@@ -148,13 +148,13 @@ if ( !defined('udf_functions') )
 
                 $query = "SELECT {$row['2']} FROM {$GLOBALS['CONFIG']['db_prefix']}data WHERE id = '{$_REQUEST['id']}'";
                 $subresult = mysqli_query($conn,$query) or die ("Error in query116: $query. " . mysqli_error($conn)());
-                $subrow = mysql_fetch_row($subresult);
+                $subrow = mysqli_fetch_row($subresult);
                 $sel = $subrow[0];
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
 
                 $query = 'SELECT id, value FROM ' . $row[2];
                 $subresult = mysqli_query($conn,$query) or die ("Error in query122: $query. " . mysqli_error($conn)());
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
                     if ( $row[1] == 1 )
                     {
@@ -173,7 +173,7 @@ if ( !defined('udf_functions') )
                         echo '>' . $subrow[1];
                     }
                 }
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
                 if ($row[1] == 1)
                     echo '</select>';
                 echo '</td></tr>';
@@ -183,9 +183,9 @@ if ( !defined('udf_functions') )
                 echo '<tr><td>' . $row[0] . '</td><td>';
                 $query = "SELECT {$row['2']} FROM {$GLOBALS['CONFIG']['db_prefix']}data WHERE id = '{$_REQUEST['id']}'";
                 $subresult = mysqli_query($conn,$query) or die ("Error in query151: $query. " . mysqli_error($conn)());
-                $subrow = mysql_fetch_row($subresult);
+                $subrow = mysqli_fetch_row($subresult);
                 echo '<input type="text" name="' . $row[2] . '" size="50" value="' . $subrow[0] . '">';
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
             }
 			//CHM
             elseif( $row[1] == 4)
@@ -199,13 +199,13 @@ if ( !defined('udf_functions') )
 
                 $query = "SELECT {$row['2']} FROM {$GLOBALS['CONFIG']['db_prefix']}data WHERE id = '{$_REQUEST['id']}'";
                 $subresult = mysqli_query($conn,$query) or die ("Error in query116: $query. " . mysqli_error($conn)());
-                $subrow = mysql_fetch_row($subresult);
+                $subrow = mysqli_fetch_row($subresult);
                 $sel_pri = $subrow[0];
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
 
                 $query = 'SELECT id, value FROM ' . $row[2];
                 $subresult = mysqli_query($conn,$query) or die ("Error in query117: $query. " . mysqli_error($conn)());
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
                     if ( $row[1] == 4 )
                     {
@@ -226,9 +226,9 @@ if ( !defined('udf_functions') )
 				
                 $query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}udftbl_{$field_name}_secondary FROM {$GLOBALS['CONFIG']['db_prefix']}data WHERE id = '{$_REQUEST['id']}'";
                 $subresult = mysqli_query($conn,$query) or die ("Error in query116: $query. " . mysqli_error($conn)());
-                $subrow = mysql_fetch_row($subresult);
+                $subrow = mysqli_fetch_row($subresult);
                 $sel = $subrow[0];
-                mysql_free_result($subresult);
+                mysqli_free_result($subresult);
 				
 				if($sel ==''){
 					echo 'Secondary items will show up here.';	
@@ -236,7 +236,7 @@ if ( !defined('udf_functions') )
                                         $query = "SELECT id, value FROM {$GLOBALS['CONFIG']['db_prefix']}udftbl_{$field_name}_secondary WHERE pr_id = '{$sel_pri}'";
 					$subresult = mysqli_query($conn,$query) or die ("Error in query123: $query. " . mysqli_error($conn)());
 					echo '<select id="' . $GLOBALS['CONFIG']['db_prefix'] . 'udftbl_'.$field_name.'_secondary" name="' . $GLOBALS['CONFIG']['db_prefix'] . 'udftbl_'.$field_name.'_secondary">';
-					while ($subrow = mysql_fetch_row($subresult))
+					while ($subrow = mysqli_fetch_row($subresult))
 					{
 						if ( $row[1] == 4 )
 						{
@@ -254,7 +254,7 @@ if ( !defined('udf_functions') )
             }
 			//CHM
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_edit_file_update()
@@ -262,7 +262,7 @@ if ( !defined('udf_functions') )
         $query = "SELECT display_name,field_type,table_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die("Error in query163: $query. " . mysqli_error($conn)());
         $i = 0; //CHM
-        while ($row = mysql_fetch_row($result)) {
+        while ($row = mysqli_fetch_row($result)) {
             if ($row[1] == 1 || $row[1] == 2 || $row[1] == 3 || $row[1] == 4) { //CHM sub select option 4 added
                 if (isset($_REQUEST[$row[2]]) && $_REQUEST[$row[2]] != "") {
                     $query = "UPDATE {$GLOBALS['CONFIG']['db_prefix']}data SET `{$row['2']}`='{$_REQUEST[$row['2']]}' WHERE id = {$_REQUEST['id']}";
@@ -280,7 +280,7 @@ if ( !defined('udf_functions') )
                 }
             }
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     /**
@@ -294,7 +294,7 @@ if ( !defined('udf_functions') )
         
         $query = "SELECT display_name,field_type,table_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die ("Error in query181: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {
             if ( $row[1] == 1 || $row[1] == 2)
             {
@@ -302,9 +302,9 @@ if ( !defined('udf_functions') )
                 $subresult = mysqli_query($conn,$query) or die ("Error in query187: $query. " . mysqli_error($conn)());
                 if($subresult)
                 {
-                    $subrow = mysql_fetch_row($subresult);
+                    $subrow = mysqli_fetch_row($subresult);
                     $return_string .= '<th valign=top align=right>' . $row[0] . ':</th><td>' . $subrow[0] . '</td></tr>';
-                    mysql_free_result($subresult);
+                    mysqli_free_result($subresult);
                 }
             } 
             elseif ($row[1] == 3)
@@ -313,9 +313,9 @@ if ( !defined('udf_functions') )
                 $subresult = mysqli_query($conn,$query) or die ("Error in query198: $query. " . mysqli_error($conn)());
                 if ($subresult)
                 {
-                    $subrow = mysql_fetch_row($subresult);
+                    $subrow = mysqli_fetch_row($subresult);
                     $return_string .=  '<th valign=top align=right>' . $row[0] . ':</th><td>' . $subrow[0] . '</td></tr>';
-                    mysql_free_result($subresult);
+                    mysqli_free_result($subresult);
                 }
 
             }
@@ -326,15 +326,15 @@ if ( !defined('udf_functions') )
                 $subresult = mysqli_query($conn,$query) or die ("Error in query199: $query. " . mysqli_error($conn)());
                 if ($subresult)
                 {
-                    $subrow = mysql_fetch_row($subresult);
+                    $subrow = mysqli_fetch_row($subresult);
                     $return_string .= '<th valign=top align=right>' . $row[0] . ':</th><td>' . $subrow[0] . '</td></tr>';
-                    mysql_free_result($subresult);
+                    mysqli_free_result($subresult);
                 }
 
             }
 			//CHM
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
         return $return_string;
     }
 
@@ -351,11 +351,11 @@ if ( !defined('udf_functions') )
         echo '<tr><td><hr></td></tr>';
         $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die ("Error in query223: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {
             echo '<tr><td><b><a href="'.$secureurl->encode('udf.php?submit=edit&udf='.$row[0].'&state=' . ($_REQUEST['state']+1)).'">'.$row[2].'</a></b></td></tr>';
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
         echo '</table></td>';
     }
 
@@ -363,7 +363,7 @@ if ( !defined('udf_functions') )
     {
         $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf order by id";
         $result = mysqli_query($conn,$query) or die ("Error in query235: $query. " . mysqli_error($conn)());
-        while ( $row = mysql_fetch_row($result))
+        while ( $row = mysqli_fetch_row($result))
         {
             if ( $row[1] == 1 || $row[1] == 2 || $row[1] == 3 )
             {
@@ -372,14 +372,14 @@ if ( !defined('udf_functions') )
                 echo "      break;\n";
             }
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_functions_java_array()
     {
         $query = "SELECT table_name,field_type FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die ("Error in query251: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {           
             if ($row[1] == 1 || $row[1] == 2)
             {
@@ -388,21 +388,21 @@ if ( !defined('udf_functions') )
                 $subresult = mysqli_query($conn,$query) or die("Error in query255: $query. " . mysqli_error($conn)());
                 echo $row[0] . "_array = new Array();\n";              
                 $index = 0;
-                while ($subrow = mysql_fetch_row($subresult))
+                while ($subrow = mysqli_fetch_row($subresult))
                 {
                     echo "\t" . $row[0] . "_array[" . $index . "] = new Array(\"" . $subrow[1] . "\", " . $subrow[0] . ");\n";
                     $index++;
                 }
             }
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_functions_java_options($id)
     {
         $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf order by id";
         $result = mysqli_query($conn,$query) or die ("Error in query270: $query. " . mysqli_error($conn)());
-        while ( $row = mysql_fetch_row($result))
+        while ( $row = mysqli_fetch_row($result))
         {
             if ( $row[1] == 1 || $row[1] == 2)
             {
@@ -410,7 +410,7 @@ if ( !defined('udf_functions') )
                 $id++;
             }
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     function udf_functions_add_udf()
@@ -442,7 +442,7 @@ if ( !defined('udf_functions') )
         $query = "SELECT * FROM {$GLOBALS['CONFIG']['db_prefix']}udf WHERE table_name='$table_name'";
         $result = mysqli_query($conn,$query);
         //echo mysqli_num_rows($result);
-        if (mysql_numrows($result) == "0")
+        if (mysqli_numrows($result) == "0")
         {
             if ($_REQUEST['field_type'] == 1 || $_REQUEST['field_type'] == 2)
             {               
@@ -625,12 +625,12 @@ if ( !defined('udf_functions') )
     {
         $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query) or die ("Error in query355: $query. " . mysqli_error($conn)());
-        while ($row = mysql_fetch_row($result))
+        while ($row = mysqli_fetch_row($result))
         {
             $name = str_replace(' ', '_', $row[2]);
             echo '<option value="'.$name.'">'.$name.'</option>';
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
     }
 
     /**
@@ -646,7 +646,7 @@ if ( !defined('udf_functions') )
     {
         $query = "SELECT table_name,field_type FROM {$GLOBALS['CONFIG']['db_prefix']}udf WHERE display_name = \"" . $lwhere . "\"";     
         $result = mysqli_query($conn,$query) or die ("Error in query369: $query. " . mysqli_error($conn)());
-        $row = mysql_fetch_row($result);
+        $row = mysqli_fetch_row($result);
 
         if ($row[1] == 1 || $row[1] == 2 || $row[1] == 4)
         {
@@ -658,7 +658,7 @@ if ( !defined('udf_functions') )
         {           
             $lquery .= $row[0] . $lequate . '\'' . $lkeyword . '\'';
         }       
-        mysql_free_result($result) or die ("Error in query381: $query. " . mysqli_error($conn)());
+        mysqli_free_result($result) or die ("Error in query381: $query. " . mysqli_error($conn)());
 
         return array($lquery_pre,$lquery);
     }

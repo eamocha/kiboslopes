@@ -101,7 +101,7 @@ function dbConnect() {
 		$link = mysqli_connect($dbHost, $dbUnam, $dbPwrd);
 		if (!$link) { exit("Could not connect to the MySQL server"); }
 		if (!mysqli_select_db($dbName,$link)) { exit("Could not select the database"); }
-		//mysql_set_charset('utf8',$link); //support non-Latin char sets
+		//mysqli_set_charset('utf8',$link); //support non-Latin char sets
 		return $dbPfix; //return db table prefix
 	} else {
 		return false; //no db credentials

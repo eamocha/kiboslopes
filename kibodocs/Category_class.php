@@ -37,7 +37,7 @@ if (!defined('Category_class'))
             {
                 $categoryListArray[] = $row;
             }
-            mysql_free_result ($result);
+            mysqli_free_result ($result);
             return $categoryListArray;
         }
 

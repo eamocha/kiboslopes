@@ -49,7 +49,7 @@ $sql = mysqli_query($conn,"UPDATE  tbl_trip_hotels SET deleted=1 WHERE itineray_
 
 
 
-if( mysql_affected_rows()!=0){
+if( mysqli_affected_rows()!=0){
 
 	//$n="'2')";
 
@@ -79,7 +79,7 @@ $d_sql="INSERT INTO `tbl_changes` values('','$id','','$today','3','$description'
 
 $sql = mysqli_query($conn,"UPDATE  tbl_itinerary SET deleted=1 WHERE itinerary_id = $itnid");
 
-if( mysql_affected_rows()!=0){
+if( mysqli_affected_rows()!=0){
 
 	//$n="'2')";
 

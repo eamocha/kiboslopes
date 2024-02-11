@@ -97,7 +97,7 @@ if( !defined('FileData_class') )
             $result = mysqli_query($conn,$query, $this->connection) or die ("Error in query: $query. " . mysqli_error($conn)());
             if( mysqli_num_rows($result) == $this->result_limit )
             {
-                while( list($category, $owner, $created_date, $description, $comment, $status, $department, $default_rights) = mysql_fetch_row($result) )
+                while( list($category, $owner, $created_date, $description, $comment, $status, $department, $default_rights) = mysqli_fetch_row($result) )
                 {
                     $this->category = $category;
                     $this->owner = $owner;
@@ -154,7 +154,7 @@ if( !defined('FileData_class') )
             $query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_CATEGORY.name FROM {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_CATEGORY WHERE {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_CATEGORY.id = $this->category";
             $result = mysqli_query($conn,$query, $this->connection) or die ("Error in query: $query. " . mysqli_error($conn)());
             if( mysqli_num_rows($result) == $this->result_limit)
-                list($name) = mysql_fetch_row($result);
+                list($name) = mysqli_fetch_row($result);
             else
             {
                 $this->error = 'Non unique file id';
@@ -250,7 +250,7 @@ if( !defined('FileData_class') )
             $d_uid = array();// init for array of dept_id;
             for($i = 0; $i<mysqli_num_rows($non_prev_u_reslt); $i++)
             {
-                list($not_u_uid[$i]) = mysql_fetch_row($non_prev_u_reslt);
+                list($not_u_uid[$i]) = mysqli_fetch_row($non_prev_u_reslt);
             }
 
             $d_query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_USER.id, {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_DEPT_PERMS.dept_id
@@ -268,14 +268,14 @@ if( !defined('FileData_class') )
                 echo 'Error in DB, multiple ownership';
                 exit;
             }
-            $owner_uid = mysql_fetch_row($owner_result);
+            $owner_uid = mysqli_fetch_row($owner_result);
             for($i = 0; $i<mysqli_num_rows($u_result); $i++)
             {
-                list($u_uid[$i]) = mysql_fetch_row($u_result);
+                list($u_uid[$i]) = mysqli_fetch_row($u_result);
             }
             for($i = 0; $i<mysqli_num_rows($d_result); $i++)
             {
-                list($d_uid[$i]) = mysql_fetch_row($d_result);
+                list($d_uid[$i]) = mysqli_fetch_row($d_result);
             }
 
             if( isset($owner_uid) && isset($u_uid) )
@@ -287,9 +287,9 @@ if( !defined('FileData_class') )
                 $result_array = databaseData::combineArrays($result_array, $d_uid);
             }
 
-            mysql_free_result($owner_result);
-            mysql_free_result($u_result);
-            mysql_free_result($d_result);
+            mysqli_free_result($owner_result);
+            mysqli_free_result($u_result);
+            mysqli_free_result($d_result);
             return $result_array;
         }
         // return the status of the file
@@ -334,7 +334,7 @@ if( !defined('FileData_class') )
                 //exit;
             }
 
-            list($dept) = mysql_fetch_row($result);
+            list($dept) = mysqli_fetch_row($result);
             return $dept;
         }
         // return the date that the file was created on
@@ -348,7 +348,7 @@ if( !defined('FileData_class') )
             /*$query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_LOG.modified_on FROM {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_LOG WHERE {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_LOG.id = '$this->id' ORDER BY {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_LOG.modified_on DESC LIMIT 1;";
 		$result = mysqli_query($conn,$query, $this->connection) or die ("Error in query: $query. " . mysqli_error($conn)());
                 if( mysqli_num_rows($result) == $this->result_limit)
-                        list($name) = mysql_fetch_row($result);
+                        list($name) = mysqli_fetch_row($result);
                 else
                 {
                                 $this->error = 'Non unique file id';
@@ -357,7 +357,7 @@ if( !defined('FileData_class') )
 
             $query = "SELECT modified_on FROM {$GLOBALS['CONFIG']['db_prefix']}$this->TABLE_LOG WHERE id = '$this->id' ORDER BY modified_on DESC limit 1;";
             $result = mysqli_query($conn,$query) or die ("Error in query: $query. " . mysqli_error($conn)());
-            list($name) = mysql_fetch_row($result);
+            list($name) = mysqli_fetch_row($result);
             return $name;
         }
         // return the realname of the file
@@ -412,18 +412,18 @@ if( !defined('FileData_class') )
             $u_uid = array();
             for($i = 0; $i<mysqli_num_rows($u_result); $i++)
             {
-                list($u_uid[$i]) = mysql_fetch_row($u_result);
+                list($u_uid[$i]) = mysqli_fetch_row($u_result);
             }
             for($i = 0; $i<mysqli_num_rows($d_result); $i++)
             {
-                list($d_uid[$i]) = mysql_fetch_row($d_result);
+                list($d_uid[$i]) = mysqli_fetch_row($d_result);
             }
 
             $result_array = databaseData::combineArrays(array(), $u_uid);
             $result_array = databaseData::combineArrays($result_array, $d_uid);
 
-            mysql_free_result($u_result);
-            mysql_free_result($d_result);
+            mysqli_free_result($u_result);
+            mysqli_free_result($d_result);
             return $result_array;
 
 
@@ -474,9 +474,9 @@ if( !defined('FileData_class') )
             
             for($i = 0; $i<mysqli_num_rows($result); $i++)
             {
-                list($did[$i]) = mysql_fetch_row($result);
+                list($did[$i]) = mysqli_fetch_row($result);
             }
-            mysql_free_result($result);
+            mysqli_free_result($result);
             
             return $did;
         }
@@ -496,9 +496,9 @@ if( !defined('FileData_class') )
             
             for($i = 0; $i<mysqli_num_rows($result); $i++)
             {
-                list($rights) = mysql_fetch_row($result);
+                list($rights) = mysqli_fetch_row($result);
             }
-            mysql_free_result($result);
+            mysqli_free_result($result);
             
             return $rights;            
         }
@@ -523,8 +523,8 @@ if( !defined('FileData_class') )
                 echo('DB error.  Unable to locate file id ' . $this->id . ' in table '.$GLOBALS['CONFIG']['db_prefix'].'data.  Please contact ' . $GLOBALS['CONFIG']['site_mail'] . 'for help');
                 exit;
             }
-            list($publishable) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($publishable) = mysqli_fetch_row($result);
+            mysqli_free_result($result);
             return $publishable;
         }
         function isArchived()
@@ -536,8 +536,8 @@ if( !defined('FileData_class') )
                 echo('DB error.  Unable to locate file id ' . $this->id . ' in table '.$GLOBALS['CONFIG']['db_prefix'].'data.  Please contact ' . $GLOBALS['CONFIG']['site_mail'] . 'for help');
                 exit;
             }
-            list($publishable) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($publishable) = mysqli_fetch_row($result);
+            mysqli_free_result($result);
             return ($publishable == 2);
         }
         // this function sets the publisable field in the data table to $boolean
@@ -557,8 +557,8 @@ if( !defined('FileData_class') )
                 echo 'Multiple entry for same id(' . $this->id . ')';
                 exit;
             }
-            list($reviewer) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($reviewer) = mysqli_fetch_row($result);
+            mysqli_free_result($result);
             return $reviewer;
         }
         // return the username of the reviewer
@@ -595,8 +595,8 @@ if( !defined('FileData_class') )
                 echo('NON-UNIQUE entries in DB');
                 exit;
             }
-            list($comments) = mysql_fetch_row($result);
-            mysql_free_result($result);
+            list($comments) = mysqli_fetch_row($result);
+            mysqli_free_result($result);
             return $comments;
         }
         function temp_delete()

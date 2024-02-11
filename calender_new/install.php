@@ -107,26 +107,26 @@ if (isset($_POST['install'])) {
 		}
 		//Connect to Database
 		if (!$_POST['dbPwrd']) {
-			$link = mysql_connect ($_POST['dbHost'], $_POST['dbUnam']);
+			$link = mysqli_connect ($_POST['dbHost'], $_POST['dbUnam']);
 		} else {
-			$link = mysql_connect ($_POST['dbHost'], $_POST['dbUnam'], $_POST['dbPwrd']);
+			$link = mysqli_connect ($_POST['dbHost'], $_POST['dbUnam'], $_POST['dbPwrd']);
 		}
 		if (!$link) {
 			echo "<br><h5 class=\"hilight\">Error: Unable to connect to MySQL</h5><br>\n";
 			echo "<p>Unable to connect to the database server, please go <button type=\"button\" onclick=\"history.back()\">back</button> and check the database server, username and password</p>.\n";
 			break;
 		}
-		$connect = mysql_select_db($_POST['dbName'],$link);
+		$connect = mysqli_select_db($_POST['dbName'],$link);
 		if (!$connect) {
 			echo "<br><h5 class=\"hilight\">Error: Unable to select the database</h5><br>\n";
 			echo "<p>Unable to select the database ".$_POST['dbName'].", please go <button type=\"button\" onclick=\"history.back()\">back</button> and check the database name</p>.\n";
 			break;
 		}
 		//check for existing installation
-		$rSet1 = mysql_query("SELECT count(*) FROM ".$_POST['dbPfix']."events");
-		$rSet2 = mysql_query("SELECT count(*) FROM ".$_POST['dbPfix']."categories");
-		$rSet3 = mysql_query("SELECT count(*) FROM ".$_POST['dbPfix']."users");
-		$rSet4 = mysql_query("SELECT count(*) FROM ".$_POST['dbPfix']."settings");
+		$rSet1 = mysqli_query("SELECT count(*) FROM ".$_POST['dbPfix']."events");
+		$rSet2 = mysqli_query("SELECT count(*) FROM ".$_POST['dbPfix']."categories");
+		$rSet3 = mysqli_query("SELECT count(*) FROM ".$_POST['dbPfix']."users");
+		$rSet4 = mysqli_query("SELECT count(*) FROM ".$_POST['dbPfix']."settings");
 		if ($rSet1 or $rSet2 or $rSet3 or $rSet4) {
 			echo "<br><h5 class=\"hilight\">Error: Existing Calendar in database</h5><br>\n";
 			echo "<p>There exists already a calendar in the database with this name, please go <button type=\"button\" onclick=\"history.back()\">back</button> and remove all tables of the existing calendar.</p>\n";
@@ -140,7 +140,7 @@ if (isset($_POST['install'])) {
 		}
 		unlink('./lctest.dat'); // delete test file
 		//create database tables
-		$users = mysql_query("CREATE TABLE ".$_POST['dbPfix']."users (
+		$users = mysqli_query("CREATE TABLE ".$_POST['dbPfix']."users (
 			user_id INT(6) unsigned NOT NULL AUTO_INCREMENT,
 			user_name VARCHAR(32) NOT NULL DEFAULT '',
 			password VARCHAR(32) NOT NULL DEFAULT '',
@@ -156,7 +156,7 @@ if (isset($_POST['install'])) {
 			status TINYINT(1) NOT NULL DEFAULT '0',
 			PRIMARY KEY (user_id)
 			)");
-		$categories = mysql_query("CREATE TABLE ".$_POST['dbPfix']."categories (
+		$categories = mysqli_query("CREATE TABLE ".$_POST['dbPfix']."categories (
 			category_id INT(4) unsigned NOT NULL AUTO_INCREMENT,
 			name VARCHAR(40) NOT NULL DEFAULT '',
 			sequence INT(2) unsigned NOT NULL DEFAULT '1',
@@ -173,7 +173,7 @@ if (isset($_POST['install'])) {
 			status TINYINT(1) NOT NULL DEFAULT '0',
 			PRIMARY KEY (category_id)
 			)");
-		$events = mysql_query("CREATE TABLE ".$_POST['dbPfix']."events (
+		$events = mysqli_query("CREATE TABLE ".$_POST['dbPfix']."events (
 			event_id INT(8) unsigned NOT NULL AUTO_INCREMENT,
 			event_type TINYINT(1) unsigned NOT NULL DEFAULT '0',
 			title VARCHAR(64) DEFAULT NULL,
@@ -201,7 +201,7 @@ if (isset($_POST['install'])) {
 			status TINYINT(1) NOT NULL DEFAULT '0',
 			PRIMARY KEY (event_id)
 			)");
-		$settings = mysql_query("CREATE TABLE ".$_POST['dbPfix']."settings (
+		$settings = mysqli_query("CREATE TABLE ".$_POST['dbPfix']."settings (
 			name VARCHAR(15) NOT NULL DEFAULT '',
 			value TEXT DEFAULT NULL,
 			description TEXT DEFAULT NULL
@@ -214,9 +214,9 @@ if (isset($_POST['install'])) {
 		}
 		//insert initial data
 		$crypt_pw=md5($_POST['adminPword']);
-		$category = mysql_query("INSERT INTO ".$_POST['dbPfix']."categories (category_id, name, sequence) VALUES (1,'no cat',1)");
-		$public_user = mysql_query("INSERT INTO ".$_POST['dbPfix']."users (user_id, user_name, email, privs) VALUES (1,'Public Access',' ',1)");
-		$admin_user = mysql_query("INSERT INTO ".$_POST['dbPfix']."users (user_id, user_name, email, password, sedit, privs) VALUES (NULL,'".$_POST['adminUname']."','".$_POST['adminEmail']."','".$crypt_pw."',1,3)");
+		$category = mysqli_query("INSERT INTO ".$_POST['dbPfix']."categories (category_id, name, sequence) VALUES (1,'no cat',1)");
+		$public_user = mysqli_query("INSERT INTO ".$_POST['dbPfix']."users (user_id, user_name, email, privs) VALUES (1,'Public Access',' ',1)");
+		$admin_user = mysqli_query("INSERT INTO ".$_POST['dbPfix']."users (user_id, user_name, email, password, sedit, privs) VALUES (NULL,'".$_POST['adminUname']."','".$_POST['adminEmail']."','".$crypt_pw."',1,3)");
 		if (!$category or !$public_user or !$admin_user) {
 			echo "<br><h5 class=\"hilight\">Error: Problem writing to tables</h5><br>\n";
 			echo "<p>Created tables, but can not write to tables. Please check your database permissions. You will need to clean out the tables in the database and try again.</p>\n";
@@ -241,10 +241,10 @@ if (isset($_POST['install'])) {
 		}
 
 		//save calendar settings in database
-		$settings = mysql_query("INSERT INTO ".$_POST['dbPfix']."settings VALUES
-			('calendarTitle','".mysql_real_escape_string(stripslashes($_POST['title']))."','Calendar title displayed in the top bar'),
-			('calendarUrl','".mysql_real_escape_string(stripslashes($_POST['url']))."','Calendar location (URL)'),
-			('calendarEmail','".mysql_real_escape_string(stripslashes($_POST['adminEmail']))."','Sender in and receiver of email notifications'),
+		$settings = mysqli_query("INSERT INTO ".$_POST['dbPfix']."settings VALUES
+			('calendarTitle','".mysqli_real_escape_string(stripslashes($_POST['title']))."','Calendar title displayed in the top bar'),
+			('calendarUrl','".mysqli_real_escape_string(stripslashes($_POST['url']))."','Calendar location (URL)'),
+			('calendarEmail','".mysqli_real_escape_string(stripslashes($_POST['adminEmail']))."','Sender in and receiver of email notifications'),
 			('timeZone','Europe/Amsterdam','Calendar time zone'),
 			('chgEmailList','','Destin. email addresses for calendar changes'),
 			('chgNofDays','1','Number of days to look back for calendar changes'),
@@ -317,7 +317,7 @@ if (isset($_POST['install'])) {
 		echo "<br>";
 		echo "<br><p>Click <strong><button type=\"button\" onclick=\"window.location='".$_POST['url']."'\">here</button></strong> to start the calendar</p>\n";
 	} while (false);
-	if ($link) { mysql_close($link); }
+	if ($link) { mysqli_close($link); }
 } else {
 	$calURL = $_SERVER['SERVER_NAME'].rtrim(dirname($_SERVER["PHP_SELF"]),'/').'/';
 ?>

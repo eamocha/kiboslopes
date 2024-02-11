@@ -84,10 +84,10 @@ else
     // form submitted - begin download
     else
     {
-        //list($id, $realname) = mysql_fetch_row($result);
+        //list($id, $realname) = mysqli_fetch_row($result);
         $id = $filedata->getId();
         $realname = $filedata->getName();
-        //mysql_free_result($result);
+        //mysqli_free_result($result);
 
         // get the filename
         $filename = $GLOBALS['CONFIG']['dataDir'] . $_POST['id'] . '.dat';

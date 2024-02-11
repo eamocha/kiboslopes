@@ -48,7 +48,7 @@ if( !defined('Department_class') )
             $query = "SELECT name, id FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER by name";
             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die("Error in query: $query. " . mysqli_error($conn)());
             $count = 0;
-            while (list($dept_name, $dept_id) = mysql_fetch_row($result))
+            while (list($dept_name, $dept_id) = mysqli_fetch_row($result))
             {
                 $departments[$count]['id'] = $dept_id;
                 $departments[$count]['name'] = $dept_name;

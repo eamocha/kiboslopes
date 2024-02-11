@@ -317,7 +317,7 @@ if (isset($_POST['install'])) {
 		echo "<br>";
 		echo "<br><p>Click <strong><button type=\"button\" onclick=\"window.location='".$_POST['url']."'\">here</button></strong> to start the calendar</p>\n";
 	} while (false);
-	if ($link) { mysql_close($link); }
+	if ($link) { mysqli_close($link); }
 } else {
 	$calURL = $_SERVER['SERVER_NAME'].rtrim(dirname($_SERVER["PHP_SELF"]),'/').'/';
 ?>

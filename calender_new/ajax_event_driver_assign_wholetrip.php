@@ -52,7 +52,7 @@ if(mysqli_num_rows($resultDriver)>0)
 
 }
 
-mysql_free_result($resultDriver);
+mysqli_free_result($resultDriver);
 
 if(mysqli_num_rows($resultTripId)>0)
 {
@@ -60,7 +60,7 @@ if(mysqli_num_rows($resultTripId)>0)
 	$trip_id = $rowTrip->trip_id;
 }
 
-mysql_free_result($resultTripId);
+mysqli_free_result($resultTripId);
 
 
 if($trip_id!=0){
@@ -79,7 +79,7 @@ if($trip_id!=0){
 		$event_id_array[] = $rowTripEvents->event_id;
 	}
 	
-	mysql_free_result($resultTripEvents);
+	mysqli_free_result($resultTripEvents);
 }
 
 //return json with details for this event

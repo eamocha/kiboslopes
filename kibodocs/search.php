@@ -191,7 +191,7 @@ else
         }
         
         while ($lindex < $llen) {
-            list($lid_array[$lindex++]) = mysql_fetch_row($lresult);
+            list($lid_array[$lindex++]) = mysqli_fetch_row($lresult);
         }
         if(@$l_remain != '' && $lexact_phrase != "on")
         {

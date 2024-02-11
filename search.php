@@ -34,7 +34,7 @@ BODY, TD {
 <option value="">--</option>
 <?php
 	$sql = "SELECT * FROM ".$SETTINGS["data_table"]." GROUP BY city ORDER BY city";
-	$sql_result = mysql_query ($sql, $connection ) or die ('request "Could not execute SQL query" '.$sql);
+	$sql_result = mysqli_query ($sql, $connection ) or die ('request "Could not execute SQL query" '.$sql);
 	while ($row = mysqli_fetch_assoc($sql_result)) {
 		echo "<option value='".$row["city"]."'".($row["city"]==$_REQUEST["city"] ? " selected" : "").">".$row["city"]."</option>";
 	}
@@ -72,7 +72,7 @@ if ($_REQUEST["from"]<>'' and $_REQUEST["to"]<>'') {
 	$sql = "SELECT * FROM ".$SETTINGS["data_table"]." WHERE id>0".$search_string.$search_city;
 }
 
-$sql_result = mysql_query ($sql, $connection ) or die ('request "Could not execute SQL query" '.$sql);
+$sql_result = mysqli_query ($sql, $connection ) or die ('request "Could not execute SQL query" '.$sql);
 if (mysqli_num_rows($sql_result)>0) {
 	while ($row = mysqli_fetch_assoc($sql_result)) {
 ?>

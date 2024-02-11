@@ -79,8 +79,8 @@ if( !defined('User_class') )
                     $this->last_name,
                     $this->first_name,
                     $this->pw_reset_code
-                    ) = mysql_fetch_row($result);
-            mysql_free_result($result);
+                    ) = mysqli_fetch_row($result);
+            mysqli_free_result($result);
          
         }
 
@@ -94,7 +94,7 @@ if( !defined('User_class') )
             $result = mysqli_query($conn,$query, $this->connection) or die("Error in query" .mysqli_error($conn)() );
             if(mysqli_num_rows($result)==1)
             {
-                list($department) = mysql_fetch_row($result);
+                list($department) = mysqli_fetch_row($result);
                 return $department;
             }
             else
@@ -127,7 +127,7 @@ if( !defined('User_class') )
             $result = mysqli_query($conn,$query, $this->connection) or die("Error in query: ". $query .mysqli_error($conn)());
             while($index<mysqli_num_rows($result))
             {
-                list($data_published[$index]) = mysql_fetch_row($result);
+                list($data_published[$index]) = mysqli_fetch_row($result);
                 $index++;
             }
             return $data_published;
@@ -150,7 +150,7 @@ if( !defined('User_class') )
                 return false;
             }
 
-            list($isadmin) = mysql_fetch_row($result);
+            list($isadmin) = mysqli_fetch_row($result);
             return $isadmin;
         }
 
@@ -174,7 +174,7 @@ if( !defined('User_class') )
             }
             else
             {
-                list($passwd) = mysql_fetch_row($result);
+                list($passwd) = mysqli_fetch_row($result);
                 return $passwd;
             }
         }
@@ -278,7 +278,7 @@ if( !defined('User_class') )
                 $lnum_files = mysqli_num_rows($lresult);
                 for($lindex = 0; $lindex< $lnum_files; $lindex++)
                 {
-                    list($lfid) = mysql_fetch_row($lresult);
+                    list($lfid) = mysqli_fetch_row($lresult);
                     $lfile_data[$lindex] = $lfid;
                 }
                 return $lfile_data;
@@ -304,7 +304,7 @@ if( !defined('User_class') )
                 $query = "SELECT id FROM {$GLOBALS['CONFIG']['db_prefix']}data WHERE (";
                 for($index = 0; $index < $num_depts; $index++)
                 {
-                    list($dept) = mysql_fetch_row($result);
+                    list($dept) = mysqli_fetch_row($result);
                     if($index != $num_depts -1)
                     {
                         $query = $query . " {$GLOBALS['CONFIG']['db_prefix']}data.department = $dept or";
@@ -316,13 +316,13 @@ if( !defined('User_class') )
                 }
                 $query = $query . " and {$GLOBALS['CONFIG']['db_prefix']}data.publishable = 0";
 
-                mysql_free_result($result);
+                mysqli_free_result($result);
                 $result = mysqli_query($conn,$query, $this->connection) or die("Error in query: $query" . mysqli_error($conn)());
                 $file_data = array();
                 $num_files = mysqli_num_rows($result);
                 for($index = 0; $index< $num_files; $index++)
                 {
-                    list($fid) = mysql_fetch_row($result);
+                    list($fid) = mysqli_fetch_row($result);
                     $file_data[$index] = $fid;
                 }
                 return $file_data;
@@ -337,7 +337,7 @@ if( !defined('User_class') )
             $num_files = mysqli_num_rows($result);
             for($index = 0; $index< $num_files; $index++)
             {
-                list($fid) = mysql_fetch_row($result);
+                list($fid) = mysqli_fetch_row($result);
                 $file_data[$index] = $fid;
             }
             return $file_data;
@@ -351,7 +351,7 @@ if( !defined('User_class') )
             $num_files = mysqli_num_rows($result);
             for($index = 0; $index< $num_files; $index++)
             {
-                list($fid) = mysql_fetch_row($result);
+                list($fid) = mysqli_fetch_row($result);
                 $file_data[$index] = $fid;
             }
             return $file_data;
@@ -365,7 +365,7 @@ if( !defined('User_class') )
             $file_data = array();
             for($index = 0; $index< $llen; $index++)
             {
-                list($fid) = mysql_fetch_row($lresult);
+                list($fid) = mysqli_fetch_row($lresult);
                 $file_data[$index] = $fid;
             }
             return $file_data;
@@ -414,7 +414,7 @@ if( !defined('User_class') )
                 $file_data = array();
                 for ($index = 0; $index < $llen; $index++)
                 {
-                    list($fid) = mysql_fetch_row($result);
+                    list($fid) = mysqli_fetch_row($result);
                     $file_data[$index] = $fid;
                 }
                 return $file_data;

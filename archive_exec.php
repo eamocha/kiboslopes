@@ -12,7 +12,7 @@ else{
   $result = mysqli_query($conn,"SELECT * FROM tbl_trips where MONTH(arrival_date)=$mnth AND YEAR(dep_date)=$yr and deleted=0 and archived=1") or die(mysqli_error($conn)()); 
    }
             //query
- while( $array = mysql_fetch_row($result)){                        //fetch result    
+ while( $array = mysqli_fetch_row($result)){                        //fetch result    
 $r[]=$array;
   }
   echo json_encode($r);

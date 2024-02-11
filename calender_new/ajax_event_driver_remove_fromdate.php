@@ -36,7 +36,7 @@ if(mysqli_num_rows($resultEventId)>0)
 	$driver_id = $row_event->driverid;
 	
 }
-mysql_free_result($resultEventId);
+mysqli_free_result($resultEventId);
 
 
 //get the trip id in order to get events and remove driver
@@ -50,7 +50,7 @@ if(mysqli_num_rows($resultTripId)>0)
 	$trip_id = $rowTrip->trip_id;
 }
 
-mysql_free_result($resultTripId);
+mysqli_free_result($resultTripId);
 
 
 
@@ -74,7 +74,7 @@ if($trip_id!=0){
 		mysqli_query($conn,$strSQL) or die(mysqli_error($conn)());
 	}
 	
-	mysql_free_result($resultTripEvents);
+	mysqli_free_result($resultTripEvents);
 }
 
 getCalendarEventsJson($event_id_array);

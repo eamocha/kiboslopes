@@ -106,7 +106,7 @@ if( !defined("databaseData_class") );
             }
             else
             {
-                list($id) = mysql_fetch_row($result);
+                list($id) = mysqli_fetch_row($result);
             }
             return $id;
         }
@@ -129,7 +129,7 @@ if( !defined("databaseData_class") );
             }
             else
             {
-                list($name) = mysql_fetch_row($result);
+                list($name) = mysqli_fetch_row($result);
                 return $name;
             }
         }

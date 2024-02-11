@@ -78,7 +78,7 @@ if( !defined('FileTypes_class') )
             $GLOBALS['CONFIG']['allowedFileTypes'] = array();
             $sql = "SELECT type FROM {$GLOBALS['CONFIG']['db_prefix']}filetypes WHERE active='1'";
             $result = mysqli_query($conn,$sql) or die ('Getting filetypes failed: ' . mysqli_error($conn)());
-            while(list($value) = mysql_fetch_row($result))
+            while(list($value) = mysqli_fetch_row($result))
             {
                 array_push($GLOBALS['CONFIG']['allowedFileTypes'], $value);
             }
@@ -93,7 +93,7 @@ if( !defined('FileTypes_class') )
             $filetypes_arr = array();
             $query = "SELECT * FROM {$GLOBALS['CONFIG']['db_prefix']}filetypes";
             $result = mysqli_query($conn,$query) or die('Failed to edit filetypes: ' . mysqli_error($conn)());
-            while($row = mysqli_fetch_array($result, MYSQL_ASSOC))
+            while($row = mysqli_fetch_array($result, mysqli_ASSOC))
             {
                 $filetypes_arr[] = $row;
             }
@@ -110,7 +110,7 @@ if( !defined('FileTypes_class') )
             $filetypes_arr = array();
             $query = "SELECT * FROM {$GLOBALS['CONFIG']['db_prefix']}filetypes";
             $result = mysqli_query($conn,$query) or die('Failed to select filetypes list: ' . mysqli_error($conn)());
-            while($row = mysqli_fetch_array($result, MYSQL_ASSOC))
+            while($row = mysqli_fetch_array($result, mysqli_ASSOC))
             {
                 $filetypes_arr[] = $row;
             }

@@ -70,7 +70,7 @@ if (!$result) { //column 'language' not present; create it
 //Add to dates table: Primary key to optimize speed
 $result = mysqli_query($conn,"SELECT event_id FROM ".$dbPfix."dates");
 if ($result !== false) { //table 'dates' existing
-	$flags = mysql_field_flags($result, 0);
+	$flags = mysqli_field_flags($result, 0);
 	if (strpos($flags, "primary_key") === false) {
 		$altered = mysqli_query($conn,"ALTER TABLE ".$dbPfix."dates
 			ADD PRIMARY KEY (event_id)

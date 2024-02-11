@@ -70,7 +70,7 @@ function checkDb() {
 	if (!$rSet) {
 		echo '<tr><td>'.$ax['mdb_noshow_tables']."</td></tr>\n";
 	} else {
-		while ($table = mysql_fetch_row($rSet)) {
+		while ($table = mysqli_fetch_row($rSet)) {
 			echo '<tr><td>'.$ax['mdb_check_table'].' \''.$table[0].'\' - ';
 			$result = dbQuery('CHECK TABLE '.$table[0]);
 			$tableOk = false;
@@ -112,7 +112,7 @@ function compactTables() {
 	if (!$rSet) {
 		echo '<tr><td>'.$ax['mdb_noshow_tables']."</td></tr>\n";
 	} else {
-		while ($table = mysql_fetch_row($rSet)) {
+		while ($table = mysqli_fetch_row($rSet)) {
 			echo '<tr><td>'.$ax['mdb_compact_table'].' \''.$table[0].'\' - ';
 			$result = dbQuery('OPTIMIZE TABLE '.$table[0]);
 			echo (!$result ? $ax['mdb_compact_error'] : $ax['mdb_compact_done'])."</td></tr>\n";
@@ -134,15 +134,15 @@ function backupTables() {
 	} else {
 		//backup tables
 		$sqlFile = '';
-		while ($table = mysql_fetch_row($tableSet)) {
+		while ($table = mysqli_fetch_row($tableSet)) {
 			echo '<tr><td>'.$ax['mdb_backup_table'].' \''.$table[0].'\' - ';
 			$rSet = dbQuery('SELECT * FROM '.$table[0]);
-			$nrFields = mysql_num_fields($rSet);
+			$nrFields = mysqli_num_fields($rSet);
 			$sqlFile .= 'DROP TABLE '.$table[0].';';
-			$createTableCode = mysql_fetch_row(dbQuery('SHOW CREATE TABLE '.$table[0]));
+			$createTableCode = mysqli_fetch_row(dbQuery('SHOW CREATE TABLE '.$table[0]));
 			$sqlFile .= "\n\n".$createTableCode[1].";\n\n";
 			for ($i = 0; $i < $nrFields; $i++) {
-				while($row = mysql_fetch_row($rSet)) {
+				while($row = mysqli_fetch_row($rSet)) {
 					$sqlFile .= 'INSERT INTO '.$table[0].' VALUES(';
 					for($j=0; $j<$nrFields; $j++) {
 						$row[$j] = preg_replace("%\n%","\\n",$row[$j]);

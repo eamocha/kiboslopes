@@ -126,7 +126,7 @@ echo '<form action="udf.php" method="POST" enctype="multipart/form-data">';
 echo '<table border=0>';
 $query = "SELECT table_name, display_name, field_type  FROM {$GLOBALS['CONFIG']['db_prefix']}udf where table_name='{$_REQUEST['item']}'";
 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-while(list($lid, $lname, $ltype) = mysql_fetch_row($result))
+while(list($lid, $lname, $ltype) = mysqli_fetch_row($result))
 {  
     echo '<tr><th align=right>' . msg('label_name') . ':</th><td>' . $lid . '</td></tr>';
     echo '<tr><th align=right>' . msg('label_display') . ':</th><td>' . $lname . '</td></tr>';
@@ -178,13 +178,13 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'deletepick')
 <?php
         $query = "SELECT table_name,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf ORDER BY id";
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-        while(list($lid, $lname) = mysql_fetch_row($result))
+        while(list($lid, $lname) = mysqli_fetch_row($result))
         {
                 $str = '<option value="' . $lid . '"';
                 $str .= '>' . $lname . '</option>';
                 echo $str;
         }
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
         $deletepick='';
 ?>
         </select>
@@ -216,7 +216,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'Show User Defined F
     $query = "SELECT name FROM {$GLOBALS['CONFIG']['db_prefix']}category where id='{$_REQUEST['item']}'";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
     echo('<table name="main" cellspacing="15" border="0">');
-    list($lcategory) = mysql_fetch_row($result);
+    list($lcategory) = mysqli_fetch_row($result);
     echo '<th>' . msg('name') . '</th><th>ID</th>';
     echo '<tr>';
     echo '<td>' . $lcategory . '</td>';
@@ -247,11 +247,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'showpick')
 <?php
     $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category ORDER BY name";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-    while(list($lid, $lname) = mysql_fetch_row($result))
+    while(list($lid, $lname) = mysqli_fetch_row($result))
     {
         echo '<option value="' . $lid . '">' . $lname . '</option>';
     }
-    mysql_free_result ($result);
+    mysqli_free_result ($result);
     ?>
                 </select></td>
                 <tr>
@@ -276,14 +276,14 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'Update')
 <?php
         $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category where id='{$_REQUEST['item']}'";
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-        while(list($lid, $lname) = mysql_fetch_row($result))
+        while(list($lid, $lname) = mysqli_fetch_row($result))
         {
                 echo '<tr>';
                 echo '<td><input maxlength="16" type="textbox" name="name" value="' . $lname . '"></td>';
                 echo '<td><input type="hidden" name="id" value="' . $lid . '"></td>';
                 echo '</tr>';
         }
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
 ?>
                 <td>
                         <input type="Submit" name="updatecategory" value="Modify User Defined Field">
@@ -311,11 +311,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'updatepick')
         // query to get a list of users
         $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category ORDER BY name";
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-        while(list($lid, $lname) = mysql_fetch_row($result))
+        while(list($lid, $lname) = mysqli_fetch_row($result))
         {
                 echo '<option value="' . $lid . '">' . $lname . '</option>';
         }
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
 ?>
                 </td>
         </tr>
@@ -344,10 +344,10 @@ elseif (isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'edit')
     
     $query = "SELECT table_name,field_type,display_name FROM {$GLOBALS['CONFIG']['db_prefix']}udf WHERE table_name = '{$_REQUEST['udf']}'";
     $result = mysqli_query($conn,$query);
-    $row = mysql_fetch_row($result);
+    $row = mysqli_fetch_row($result);
     $display_name = $row[2];
     $field_type = $row[1];
-    mysql_free_result($result);
+    mysqli_free_result($result);
     if ( $field_type == 1 || $field_type == 2) {
         // Do Updates
         if (isset($_REQUEST['display_name']) && $_REQUEST['display_name'] != "" ) {
@@ -363,9 +363,9 @@ elseif (isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'edit')
         // Do Deletes
         $query = 'SELECT max(id) FROM '.$_REQUEST['udf'];
         $result = mysqli_query($conn,$query);
-        $row = mysql_fetch_row($result);
+        $row = mysqli_fetch_row($result);
         $max = $row[0];
-        mysql_free_result($result);
+        mysqli_free_result($result);
         while ( $max > 0 ) {
             if ( isset($_REQUEST['x'.$max]) && $_REQUEST['x'.$max] == "on" ) {
                 $query = 'DELETE FROM '.$_REQUEST['udf'].' WHERE id = '.$max;
@@ -384,14 +384,14 @@ elseif (isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'edit')
         echo '<tr bgcolor="83a9f7"><th>' .msg('button_delete') . '?</th><th>' .msg('value')  . ' </th></tr>';
         $query = 'SELECT id,value FROM '.$_REQUEST['udf'];
         $result = mysqli_query($conn,$query);
-        while ($row = mysql_fetch_row($result)) {
+        while ($row = mysqli_fetch_row($result)) {
             if ( isset($bg) && $bg == "FCFCFC" )
                 $bg = "E3E7F9";
             else
                 $bg = "FCFCFC";
             echo '<tr bgcolor="'.$bg.'"><td align=center><input type=checkbox name=x'.$row[0].'></td><td>'.$row[1].'</td></tr>';
         }
-        mysql_free_result($result);
+        mysqli_free_result($result);
         echo '<tr><th align=right>' . msg('new') . ':</th><td><input type=textbox maxlength="16" name="newvalue"></td></tr>';
         echo '<tr><td colspan="2">';
         echo '<div class="buttons"><button class="positive" type="submit" value="Update">' . msg('button_update') . '</button>';
@@ -449,9 +449,9 @@ elseif (isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'edit')
         // Do Deletes
         $query = 'SELECT max(id) FROM ' . $GLOBALS['CONFIG']['db_prefix'] . 'udftbl_' . $field_name . $tablename;
         $result = mysqli_query($conn,$query);
-        $row = mysql_fetch_row($result);
+        $row = mysqli_fetch_row($result);
         $max = $row[0];
-        mysql_free_result($result);
+        mysqli_free_result($result);
         while ($max > 0) {
             if (isset($_REQUEST['x' . $max]) && $_REQUEST['x' . $max] == "on") {
                 $query = 'DELETE FROM ' . $GLOBALS['CONFIG']['db_prefix'] . 'udftbl_' . $field_name . $tablename . ' WHERE id = ' . $max;
@@ -479,14 +479,14 @@ elseif (isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'edit')
 			$query = 'SELECT * FROM ' . $_REQUEST['udf'];
 
 			$result = mysqli_query($conn,$query);
-			while ($row = mysql_fetch_row($result)) {
+			while ($row = mysqli_fetch_row($result)) {
 				if ( isset($bg) && $bg == "FCFCFC" )
 					$bg = "E3E7F9";
 				else
 					$bg = "FCFCFC";
 				echo '<tr bgcolor="'.$bg.'"><td align=center><input type=checkbox name=x'.$row[0].'></td><td>'.$row[1].'</td></tr>';
 			}
-			mysql_free_result($result);
+			mysqli_free_result($result);
 			echo '<tr><th align=right>' . msg('new') . ':</th><td><input type=textbox maxlength="16" name="newvalue"></td></tr>';
 			echo '</div>';
 			echo '<tr><td colspan="2">';

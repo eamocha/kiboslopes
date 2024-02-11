@@ -66,7 +66,7 @@ if (!isset($_POST['submit']))
     else
     {
         // get result data
-        list($description, $realname) = mysql_fetch_row($result);
+        list($description, $realname) = mysqli_fetch_row($result);
         draw_header(msg('button_check_in'),$last_message);
         // correction
         if($description == '')
@@ -75,7 +75,7 @@ if (!isset($_POST['submit']))
         }
 
         // clean up
-        mysql_free_result($result);
+        mysqli_free_result($result);
         // start displaying form
         ?>
 <table border="0" cellspacing="5" cellpadding="5">
@@ -219,7 +219,7 @@ else
         // all OK, proceed!
         $query = "SELECT username FROM {$GLOBALS['CONFIG']['db_prefix']}user WHERE id='{$_SESSION['uid']}'";
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-        list($username) = mysql_fetch_row($result);
+        list($username) = mysqli_fetch_row($result);
         // update revision log
         $query = "UPDATE {$GLOBALS['CONFIG']['db_prefix']}log set revision='" . intval((intval($lrevision_num) - 1)) . "' WHERE id = '{$id}' and revision = 'current'";
         mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());

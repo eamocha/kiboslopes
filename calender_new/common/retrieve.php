@@ -177,8 +177,8 @@ function retrieve($start,$end,$iFilter='',$xFilter='') {
 	
 	
 	$orderby = "arrday"; //change this to whatever key you want from the array 
-
-	array_multisort($sortArray[$orderby],SORT_DESC,$evtList); 
+	if(is_array($sortArray[$orderby])){
+	array_multisort($sortArray[$orderby],SORT_DESC,$evtList); }
 }
 
 //

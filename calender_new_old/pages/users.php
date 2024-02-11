@@ -157,7 +157,7 @@ function addUser() { //add user account
 		$password = md5($new_pw);
 		$result = dbQuery("INSERT INTO [db]users VALUES (NULL,'".mysqli_real_escape_string($conn,$uname)."','$password',DEFAULT,'".mysqli_real_escape_string($conn,$email)."',$privAdmin,$privPost,DEFAULT,DEFAULT,DEFAULT,'$uiLanguage','$bgrnd',DEFAULT)");
 		if (!$result) { $msg = "Database Error: ".$ax['usr_not_added']; break; }
-		$uid = mysql_insert_id();
+		$uid = mysqli_insert_id();
 		$msg = $ax['usr_added'];
 		$editUser = 'n';
 	} while (false);

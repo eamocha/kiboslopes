@@ -319,7 +319,7 @@ for($i = 0; $i<$numofrows; $i++) {
 		
 	}
 	
-	mysql_free_result($resultEvent);
+	mysqli_free_result($resultEvent);
 	
 	?>
     </td>

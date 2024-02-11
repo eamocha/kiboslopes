@@ -154,7 +154,7 @@ function my_sort ($id_array, $sort_order = 'asc', $sort_by = 'id')
     $len = mysqli_num_rows($lresult);
     for($li = 0; $li<$len; $li++)
     {
-        list($array[$li]) = mysql_fetch_row($lresult);
+        list($array[$li]) = mysqli_fetch_row($lresult);
     }
     return  array_values( array_intersect($array, $id_array) );
 }
@@ -226,27 +226,27 @@ function email_all($mail_subject, $mail_body, $mail_header)
 {
     $query = "SELECT Email FROM {$GLOBALS['CONFIG']['db_prefix']}user";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query . " . mysqli_error($conn)());
-    while( list($mail_to) = mysql_fetch_row($result) )
+    while( list($mail_to) = mysqli_fetch_row($result) )
     {
         if ($GLOBALS['CONFIG']['demo'] == 'False')
         {
             mail($mail_to, $mail_subject, $mail_body, $mail_header);
         }
     }
-    mysql_free_result($result);
+    mysqli_free_result($result);
 }
 function email_dept($dept_id, $mail_subject, $mail_body, $mail_header)
 {
     $query = "SELECT Email FROM {$GLOBALS['CONFIG']['db_prefix']}user WHERE department = $dept_id";    
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query . " . mysqli_error($conn)());   
-    while( list($mail_to) = mysql_fetch_row($result) )
+    while( list($mail_to) = mysqli_fetch_row($result) )
     {            
         if ($GLOBALS['CONFIG']['demo'] == 'False')
         {
             mail($mail_to, $mail_subject, $mail_body, $mail_header);
         }
     }   
-    mysql_free_result($result);
+    mysqli_free_result($result);
 }
 function email_users_obj($user_OBJ_array, $mail_subject, $mail_body, $mail_header)
 {
@@ -521,7 +521,7 @@ function sort_browser()
         echo("author_array = new Array();\n");
         while($index < $count)
         {
-            list($last_name, $first_name, $id) = mysql_fetch_row($result);
+            list($last_name, $first_name, $id) = mysqli_fetch_row($result);
             echo("\tauthor_array[$index] = new Array(\"$last_name $first_name\", $id);\n");
             $index++;
         }
@@ -533,7 +533,7 @@ function sort_browser()
         echo("department_array = new Array();\n");
         while($index < $count)
         {
-            list($dept, $id) = mysql_fetch_row($result);
+            list($dept, $id) = mysqli_fetch_row($result);
             echo("\tdepartment_array[$index] = new Array(\"$dept\", $id);\n");
             $index++;
         }
@@ -545,7 +545,7 @@ function sort_browser()
         echo("category_array = new Array();\n");
         while($index < $count)
         {
-            list($category, $id) = mysql_fetch_row($result);
+            list($category, $id) = mysqli_fetch_row($result);
             echo("\tcategory_array[$index] = new Array(\"$category\", $id);\n");
             $index++;
         }
@@ -657,7 +657,7 @@ function getAllUsers()
     $return_array = array();
     for($li = 0;$li<$llen; $li++)
     {
-        list($lid, $llast_name, $lfirst_name, $lusername) = mysql_fetch_row($lresult);
+        list($lid, $llast_name, $lfirst_name, $lusername) = mysqli_fetch_row($lresult);
         $return_array[$li] = array($lid, "$llast_name, $lfirst_name", $lusername);
     }
     return $return_array;
@@ -749,7 +749,7 @@ function sanitizeme($input)
         $input  = cleanInput($input);
         //echo "Clean Input:" . $input . "<br />";
         $output = mysqli_real_escape_string($conn,$input);
-        //echo "mysql_escape output" . $output . "<br />";
+        //echo "mysqli_escape output" . $output . "<br />";
 
     }
     if(isset($output) && $output != '')

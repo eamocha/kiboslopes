@@ -26,7 +26,7 @@ while($row=mysqli_fetch_array($q)){
 
 	$q2=mysqli_query($conn,"update events e set itinerary_id=$itn WHERE title = '$g'  and s_date= '$d' and itinerary_id=0") or die(mysqli_error($conn)());
 
-	//$i+= mysql_affected_rows($q2);
+	//$i+= mysqli_affected_rows($q2);
 
 	}
 

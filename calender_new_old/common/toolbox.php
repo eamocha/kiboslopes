@@ -101,7 +101,7 @@ function dbConnect() {
 		$link = mysqli_connect($dbHost, $dbUnam, $dbPwrd);
 		if (!$link) { exit("Could not connect to the MySQL server"); }
 		if (!mysqli_select_db($dbName,$link)) { exit("Could not select the database"); }
-		//mysql_set_charset('utf8',$link); //support non-Latin char sets
+		//mysqli_set_charset('utf8',$link); //support non-Latin char sets
 		return $dbPfix; //return db table prefix
 	} else {
 		return false; //no db credentials
@@ -112,7 +112,7 @@ function dbConnect() {
 function getSettings() {
 	$set = array(); //init
 	$rSet = dbQuery("SELECT name, value FROM [db]settings");
-	if (!$rSet) { exit("Error: Could not retrieve calendar settings from the database"); }
+	if (!$rSet) { exit(mysqli_error()."Error: Could not retrieve calendar settings from the database"); }
 	while ($row = mysqli_fetch_assoc($rSet)) {
 		$set[$row['name']] = is_numeric($row['value']) ? intval($row['value']) : stripslashes($row['value']);
 	}

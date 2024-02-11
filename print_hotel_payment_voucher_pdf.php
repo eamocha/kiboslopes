@@ -33,7 +33,7 @@ $resultTripDetails = mysqli_query($conn,"SELECT  group_name FROM   tbl_trips WHE
 
 $result=mysqli_fetch_array($resultTripDetails);
 $tripname=$result['group_name'];
-mysql_free_result($resultTripDetails);
+mysqli_free_result($resultTripDetails);
 
 
 //ccount the currentpayment

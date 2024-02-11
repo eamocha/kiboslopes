@@ -7,6 +7,6 @@ $visitor=$_GET['visitor'];
 mysqli_query($conn,"insert into tbl_flight_pax values ('','$visitor','$sel_flight')");
 
 /*$sql_in= mysqli_query($conn,"SELECT * FROM tbl_flight_pax order by tbl_flight_pax_id desc");
-$r=mysql_fetch_row($sql_in);  */
+$r=mysqli_fetch_row($sql_in);  */
 }
 ?>

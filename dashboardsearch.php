@@ -300,7 +300,7 @@ $sql = $sql." ORDER BY arrival_date";
 
 
 
-$sql_result = mysql_query ($sql) or die ('request "Could not execute SQL query" '.$sql. mysqli_error($conn)());
+$sql_result = mysqli_query ($sql) or die ('request "Could not execute SQL query" '.$sql. mysqli_error($conn)());
 
 if (mysqli_num_rows($sql_result)>0) {
 

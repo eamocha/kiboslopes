@@ -1638,7 +1638,7 @@ class FGMembersite
 
     {
 
-        if( function_exists( "mysql_real_escape_string" ) )
+        if( function_exists( "mysqli_real_escape_string" ) )
 
         {
 

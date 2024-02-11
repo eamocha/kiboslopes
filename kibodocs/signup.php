@@ -46,7 +46,7 @@ if($GLOBALS['CONFIG']['allow_signup'] == 'True')
             $query = "INSERT INTO {$GLOBALS['CONFIG']['db_prefix']}user (username, password, department, phone, Email,last_name, first_name) VALUES('". addslashes($_POST['username'])."', md5('". addslashes(@$_REQUEST['password']) ."'), '" . addslashes($_REQUEST['department'])."' ,'" . addslashes($phonenumber) . "','". addslashes($_REQUEST['Email'])."', '" . addslashes($_REQUEST['last_name']) . "', '" . addslashes($_REQUEST['first_name']) . '\' )';
             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
             // INSERT into admin
-            $userid = mysql_insert_id($GLOBALS['connection']);
+            $userid = mysqli_insert_id($GLOBALS['connection']);
 
             // mail user telling him/her that his/her account has been created.
             echo msg ('message_account_created') . ' ' . $_POST['username'].'<br />';
@@ -113,12 +113,12 @@ if($GLOBALS['CONFIG']['allow_signup'] == 'True')
         $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
 
-    while(list($id, $name) = mysql_fetch_row($result))
+    while(list($id, $name) = mysqli_fetch_row($result))
     {
         echo '<option value=' . $id . '>' . $name . '</option>';
     }
 
-    mysql_free_result ($result);
+    mysqli_free_result ($result);
     ?>
         </select>
         </td>

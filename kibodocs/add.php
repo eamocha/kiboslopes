@@ -282,7 +282,7 @@ else
 
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
         // get id from INSERT operation
-        $fileId = mysql_insert_id($GLOBALS['connection']);
+        $fileId = mysqli_insert_id($GLOBALS['connection']);
 
         udf_add_file_insert($fileId);
 

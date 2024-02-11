@@ -37,7 +37,7 @@ if(mysqli_num_rows($lresult) != 1)
 }
 else
 {	
-    list($lroot_id) = mysql_fetch_row($lresult);
+    list($lroot_id) = mysqli_fetch_row($lresult);
 }
 // calculate current date
 $lcurrent_date = date ('Y-m-d');
@@ -75,7 +75,7 @@ echo msg('message_rejecting_files'). ' ' . $lexpired_revision . '<br>';
 echo msg('message_rejected') . ' ' . mysqli_num_rows($lresult) . ' file(s)<br>';
 for($i = 0; $i<mysqli_num_rows($lresult); $i++)
 {
-    list($lid) = mysql_fetch_row($lresult);
+    list($lid) = mysqli_fetch_row($lresult);
     echo '&nbsp;&nbsp;' . $i . ' File ID: ' . $lid . '<br>';
 }
 // Notify owner
@@ -97,7 +97,7 @@ if($GLOBALS['CONFIG']['file_expired_action'] != 4)
     $mail_salute="\n\r\n\r" . msg('email_salute') . ",\n\r$full_name";
     for($i = 0; $i<mysqli_num_rows($lresult); $i++)
     {
-        list($lid) = mysql_fetch_row($lresult);
+        list($lid) = mysqli_fetch_row($lresult);
         $file_obj = new FileData($lid, $GLOBALS['connection'], DB_NAME);
         $user_obj = new User($file_obj->getOwner(), $GLOBALS['connection'], DB_NAME);
         $mail_to = $user_obj->getEmailAddress();
@@ -114,7 +114,7 @@ if($GLOBALS['CONFIG']['file_expired_action'] == 1 ) //do not show file
     $reviewer_comments = 'To=' . msg('author') . ';Subject=' . msg('message_file_expired') . ';Comments=' . msg('email_file_was_rejected_because'). ' ' .$GLOBALS['CONFIG']['revision_expiration'] . ' ' . msg('days');
     for($i = 0; $i<mysqli_num_rows($lresult); $i++)
     {
-        list($lid) = mysql_fetch_row($lresult);
+        list($lid) = mysqli_fetch_row($lresult);
         $file_obj = new FileData($lid, $GLOBALS['connection'], DB_NAME);
         $file_obj->Publishable(-1);
         $file_obj->setReviewerComments($reviewer_comments);
@@ -126,7 +126,7 @@ if( $GLOBALS['CONFIG']['file_expired_action'] == 2 ) //lock file, not check-outa
     $lresult = mysqli_query($conn,$lquery) or die('Error querying: ' . $lquery . mysqli_error($conn)());
     for($i = 0; $i<mysqli_num_rows($lresult); $i++)
     {
-        list($lid) = mysql_fetch_row($lresult);
+        list($lid) = mysqli_fetch_row($lresult);
         $file_obj = new FileData($lid, $GLOBALS['connection'], DB_NAME);
         $file_obj->setStatus(-1);
     }

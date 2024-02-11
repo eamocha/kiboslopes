@@ -70,7 +70,7 @@ else
 
     $row_color = "#FCFCFC";
     // iterate through resultset
-    while(list($id, $last_name, $first_name, $realname, $created, $description, $status) = mysql_fetch_row($result))
+    while(list($id, $last_name, $first_name, $realname, $created, $description, $status) = mysqli_fetch_row($result))
     {
         // correction
         if ($description == '')
@@ -102,7 +102,7 @@ else
     }
 
     // clean up
-    mysql_free_result ($result);
+    mysqli_free_result ($result);
 
     echo '</table>';
 }

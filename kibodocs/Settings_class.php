@@ -62,7 +62,7 @@ if( !defined('Settings_class') )
         {
             $sql = "SELECT name,value FROM {$GLOBALS['CONFIG']['db_prefix']}settings";
             $result = mysqli_query($conn,$sql) or die ('Getting settings failed: ' . mysqli_error($conn)());
-            while(list($key, $value) = mysql_fetch_row($result))
+            while(list($key, $value) = mysqli_fetch_row($result))
             {
                 $GLOBALS['CONFIG'][$key] = $value;
             }
@@ -77,7 +77,7 @@ if( !defined('Settings_class') )
             $settings_arr = array();
             $query = "SELECT * FROM {$GLOBALS['CONFIG']['db_prefix']}settings";
             $result = mysqli_query($conn,$query) or die('Failed to edit settings: ' . mysqli_error($conn)());
-            while($row = mysqli_fetch_array($result, MYSQL_ASSOC))
+            while($row = mysqli_fetch_array($result, mysqli_ASSOC))
             {
                 $settings_arr[] = $row;
             }

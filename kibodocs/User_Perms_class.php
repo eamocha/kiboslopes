@@ -137,7 +137,7 @@ if ( !defined('User_Perms_class') )
             $llen = mysqli_num_rows($result);
             while($index< $llen )
             {
-                list($fileid_array[++$index] ) = mysql_fetch_row($result);
+                list($fileid_array[++$index] ) = mysqli_fetch_row($result);
             }
             return $fileid_array;
         }
@@ -214,7 +214,7 @@ if ( !defined('User_Perms_class') )
             $result = mysqli_query($conn,$query, $this->connection) or die("Error in query" .mysqli_error($conn)() );
             if(mysqli_num_rows($result) ==1)
             {
-                list ($right) = mysql_fetch_row($result);
+                list ($right) = mysqli_fetch_row($result);
                 if($right==$this->FORBIDDEN_RIGHT)
                 {
                     return true;
@@ -264,7 +264,7 @@ if ( !defined('User_Perms_class') )
             $result = mysqli_query($conn,$query, $this->connection) or die("Error in query: .$query" . mysqli_error($conn)() );
             if(mysqli_num_rows($result) == 1)
             {
-                list($permission) = mysql_fetch_row($result);
+                list($permission) = mysqli_fetch_row($result);
                 return $permission;
             }
             elseif (mysqli_num_rows($result) == 0)
@@ -287,7 +287,7 @@ if ( !defined('User_Perms_class') )
             {
                 $rightsListArray[] = $row;
             }
-            mysql_free_result($result);
+            mysqli_free_result($result);
             return $rightsListArray;
         }
 
@@ -295,7 +295,7 @@ if ( !defined('User_Perms_class') )
         {
             $query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}user_perms.rights FROM {$GLOBALS['CONFIG']['db_prefix']}user_perms WHERE uid = $user_id and fid = $data_id";
             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die("Error in query: .$query" . mysqli_error($conn)());
-            list($permission) = mysql_fetch_row($result);
+            list($permission) = mysqli_fetch_row($result);
 
             return $permission;
         }

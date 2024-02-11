@@ -131,12 +131,12 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'adduser')
                 $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
 
-        while(list($id, $name) = mysql_fetch_row($result))
+        while(list($id, $name) = mysqli_fetch_row($result))
         {
                 echo '<option value=' . $id . '>' . $name . '</option>';
         }
 
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
         ?>
                 </select>
                 </td>
@@ -153,7 +153,7 @@ if(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'adduser')
                 <?php 
         $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die("Error in query: $query". mysqli_error($conn)());
-        while(list($dept_id, $dept_name) = mysql_fetch_row($result))
+        while(list($dept_id, $dept_name) = mysqli_fetch_row($result))
         {
                 echo '<OPTION value="' . $dept_id . '">' . $dept_name . '</OPTION>' . "\n";
         }
@@ -209,7 +209,7 @@ elseif(isset($_POST['submit']) && 'Add User' == $_POST['submit'])
         $query = "INSERT INTO {$GLOBALS['CONFIG']['db_prefix']}user (username, password, department, phone, Email,last_name, first_name) VALUES('". addslashes($_POST['username'])."', md5('". addslashes(@$_POST['password']) ."'), '" . addslashes($_POST['department'])."' ,'" . addslashes($phonenumber) . "','". addslashes($_POST['Email'])."', '" . addslashes($_POST['last_name']) . "', '" . addslashes($_POST['first_name']) . '\' )';
         $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
         // INSERT into admin
-        $userid = mysql_insert_id($GLOBALS['connection']);
+        $userid = mysqli_insert_id($GLOBALS['connection']);
         if (!isset($_POST['admin']))
         {
             $_POST['admin']='0';
@@ -315,12 +315,12 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                         <?php
                         $query = "SELECT id, first_name, last_name FROM {$GLOBALS['CONFIG']['db_prefix']}user WHERE id='{$_POST['item']}'";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                while(list($id, $first_name, $last_name) = mysql_fetch_row($result))
+                while(list($id, $first_name, $last_name) = mysqli_fetch_row($result))
                 {
                         echo $first_name.' '.$last_name;
                 }
 
-                mysql_free_result ($result);
+                mysqli_free_result ($result);
                 ?> 
                         ?
                         </td>
@@ -354,12 +354,12 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                         <?php
                         $query = "SELECT id,username, last_name, first_name FROM {$GLOBALS['CONFIG']['db_prefix']}user ORDER BY last_name";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                while(list($id, $username,$last_name, $first_name) = mysql_fetch_row($result))
+                while(list($id, $username,$last_name, $first_name) = mysqli_fetch_row($result))
                 {
                         echo '<option value=' . $id . '>' . $last_name . ', ' . $first_name . ' - ' . $username . '</option>';
                 }
 
-                mysql_free_result ($result);
+                mysqli_free_result ($result);
                 $deletepick="";
                 ?>
                         </select>
@@ -441,11 +441,11 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                         <?php
                         $query = "SELECT id, username, first_name, last_name FROM {$GLOBALS['CONFIG']['db_prefix']}user ORDER BY last_name";
                 $result = mysqli_query($conn,$query) or die ("Error in query: $query. " . mysqli_error($conn)());
-                while(list($id, $username, $first_name, $last_name) = mysql_fetch_row($result))
+                while(list($id, $username, $first_name, $last_name) = mysqli_fetch_row($result))
                 {
                         echo '<option value="' . $id . '">' . $last_name . ',' . $first_name . ' - ' . $username . '</option>';
                 }
-                mysql_free_result ($result);
+                mysqli_free_result ($result);
                 ?>
                         </select>
                         </td>
@@ -489,7 +489,7 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                         <?php
                 $query = "SELECT * FROM {$GLOBALS['CONFIG']['db_prefix']}user where id='" . $_REQUEST['item'] . "' ORDER BY username";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                list($id,$username, $password, $department, $phonenumber, $Email, $last_name, $first_name) = mysql_fetch_row($result);
+                list($id,$username, $password, $department, $phonenumber, $Email, $last_name, $first_name) = mysqli_fetch_row($result);
                 echo '<td><b>'.msg('userpage_id').'</b></td><td colspan=4>'.$id.'</td>';
                 echo '<input type=hidden name=id value="'.$id.'">';
                 echo '</tr>';
@@ -522,7 +522,7 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
           		<tr>
    		
 <?php
-				mysql_free_result ($result);
+				mysqli_free_result ($result);
 ?>
                 </tr>
                 <tr>
@@ -535,7 +535,7 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                 $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
                 $userdepartment = $user_obj->getDeptID();
-                while(list($id, $name) = mysql_fetch_row($result))
+                while(list($id, $name) = mysqli_fetch_row($result))
                 {
                         if ($id==$userdepartment)
                         {
@@ -547,7 +547,7 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                         }
                 }
 
-                mysql_free_result ($result);
+                mysqli_free_result ($result);
 ?>
                 </select>
                 </td>
@@ -582,16 +582,16 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                 //for dept that this user is reviewing for
                 for($i = 0; $i< $hits; $i++)
                	{
-               		list($department_reviewer[$i][0], $department_reviewer[$i][1]) = mysql_fetch_row($result);
+               		list($department_reviewer[$i][0], $department_reviewer[$i][1]) = mysqli_fetch_row($result);
                	}
                 // for all depts
                	$hits = mysqli_num_rows($result2);
                 for($i=0; $i<$hits; $i++)
                 {
-                	list( $all_department[$i][0], $all_department[$i][1]) = mysql_fetch_row($result2);
+                	list( $all_department[$i][0], $all_department[$i][1]) = mysqli_fetch_row($result2);
                 }
-                mysql_free_result($result);
-                mysql_free_result($result2);
+                mysqli_free_result($result);
+                mysqli_free_result($result2);
                 for($d= 0; $d<sizeof($all_department); $d++)
                 {
                     $found = false;
@@ -748,12 +748,12 @@ elseif(isset($_REQUEST['submit']) and $_REQUEST['submit'] == 'Delete')
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
 
 
-                while(list($id, $username, $first_name, $last_name) = mysql_fetch_row($result))
+                while(list($id, $username, $first_name, $last_name) = mysqli_fetch_row($result))
                 {
                         echo '<option value="' . $id . '">' . $last_name . ', ' . $first_name . ' - ' . $username . '</option>';
                 }
 
-                mysql_free_result ($result);                
+                mysqli_free_result ($result);                
                 ?>
                         </td>
                         <td>

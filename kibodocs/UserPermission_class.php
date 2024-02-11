@@ -86,7 +86,7 @@ if( !defined('UserPermission_class') )
 		$len = mysqli_num_rows($result);
 		for($index=0; $index < $len; $index++)
 		{
-			list($array[$index]) = mysql_fetch_row($result);
+			list($array[$index]) = mysqli_fetch_row($result);
 		}
 		$deptperm_filearray = array_diff($deptperm_filearray, $array); 
 		$total_listing = array_merge($userperm_filearray , $deptperm_filearray);
@@ -110,7 +110,7 @@ if( !defined('UserPermission_class') )
             $len = mysqli_num_rows($result);
             for($index=0; $index < $len; $index++)
             {
-                list($array[$index]) = mysql_fetch_row($result);
+                list($array[$index]) = mysqli_fetch_row($result);
             }
             $deptperm_filearray = array_diff($deptperm_filearray, $array);
             $deptperm_filearray = array_diff($deptperm_filearray, $userperm_filearray);

@@ -70,7 +70,7 @@ function  titleCase($string)  {
 
 		}
 
-		return mysql_real_escape_string($str);
+		return mysqli_real_escape_string($str);
 
 	}
 
@@ -880,7 +880,7 @@ function insertDriverToNewCalender($eventid,$eventdate,$driverid)
 			}			
 				
 			
-			mysql_free_result($resultDriver);
+			mysqli_free_result($resultDriver);
 			
 			//check if drivr already exist, just update colour
 			$sqlDriverExisting = "SELECT events_drivers_id FROM events_drivers WHERE eventid=$eventid AND taskdate='$eventdate' AND driverid=".$driverid;
@@ -930,7 +930,7 @@ function getCalendarEventsJson($event_id_array)
 
 			if(mysqli_num_rows($rSet)>0){
 
-				while($r = mysql_fetch_assoc($rSet)) {
+				while($r = mysqli_fetch_assoc($rSet)) {
 					//$rows = $r['drivername'];
 
 					$temp['drivers'][] = array(
@@ -994,7 +994,7 @@ function getDriversVehicles($eventid, $eventdate, $bolDisplayVehicle=false)
 		$strDrivers.="</ul>";
 	}
 	
-	mysql_free_result($result);
+	mysqli_free_result($result);
 	
 	return $strDrivers;
 }

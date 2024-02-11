@@ -194,7 +194,7 @@ function dbConnect() {
 
 		if (!mysqli_select_db($dbName,$link)) { exit("Could not select the database"); }
 
-		//mysql_set_charset('utf8',$link); //support non-Latin char sets
+		//mysqli_set_charset('utf8',$link); //support non-Latin char sets
 
 		return $dbPfix; //return db table prefix
 

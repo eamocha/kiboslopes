@@ -197,7 +197,7 @@ else
 	$result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
 	$current_revision = mysqli_num_rows($result);
 	// iterate through resultset
-	while(list($last_name, $first_name, $modified_on, $note, $revision_id) = mysql_fetch_row($result))
+	while(list($last_name, $first_name, $modified_on, $note, $revision_id) = mysqli_fetch_row($result))
 	{
 
             if (isset($bgcolor) && $bgcolor == "#FCFCFC") {
@@ -223,7 +223,7 @@ else
 <?php
 	}
 	// clean up
-	mysql_free_result($result);
+	mysqli_free_result($result);
 ?>
 	</table>
 </td>

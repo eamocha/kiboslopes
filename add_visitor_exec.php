@@ -75,7 +75,7 @@ if(!empty($visitor_name)){
 
 $sql="INSERT INTO tbl_visitors (`visitor_name`,`passport_details`,`trip_id`,`address`,`nationality`,`room_type`,`deleted`,`gender`,`age`,`insurance`,`log_id`,`sharing_triple`)  VALUES('$visitor_name','$passport','$tripID','$address', '$nationality','$room_type','0','','$age', '$insurance','$randno','') ";  $data=mysqli_query($conn,$sql);
 
-$last_insert_id=mysql_insert_id();
+$last_insert_id=mysqli_insert_id();
 
 
 

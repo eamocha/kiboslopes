@@ -2,7 +2,7 @@
 /*
 = check events and delete event if expired more than $eventExp =
 
-© Copyright 2009-2012  LuxSoft - www.LuxSoft.eu
+ï¿½ Copyright 2009-2012  LuxSoft - www.LuxSoft.eu
 
 -------------------------------------------------------------------
  This script depends on and is executed via the file lcalcron.php.
@@ -29,7 +29,7 @@ $result = dbQuery("UPDATE [db]events e
 	SET e.status = -1, e.m_date = '".$todayD."'
 	WHERE ((c.rpeat = 0 AND e.r_type = 0 AND (IF(e.e_date != '9999-00-00', e.e_date, e.s_date) <= '$expireD')) OR e.r_until <= '$expireD')
 ");
-$nrDeleted = mysql_affected_rows();
+$nrDeleted = mysqli_affected_rows();
 
 $sumName = "-- ".$ax['evc_sum_title']." --";
 $sumText = $ax['evc_nr_deleted'].": ".$nrDeleted.".\n";

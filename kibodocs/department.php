@@ -124,10 +124,10 @@ elseif(isset($_POST['submit']) && 'Add Department' == $_POST['submit'])
 
     for($index = 0; $index< $num_rows; $index++)
     {
-        list($data_array[$index][0], $data_array[$index][1]) = mysql_fetch_row($result);
+        list($data_array[$index][0], $data_array[$index][1]) = mysqli_fetch_row($result);
     }
 
-    mysql_free_result($result);
+    mysqli_free_result($result);
     //////Get the new department's id////////////
     $query = "SELECT id FROM {$GLOBALS['CONFIG']['db_prefix']}department WHERE name = '" . addslashes($department) . "'";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
@@ -138,7 +138,7 @@ elseif(isset($_POST['submit']) && 'Add Department' == $_POST['submit'])
         exit;
     }
 
-    list($newly_added_dept_id) = mysql_fetch_row($result);
+    list($newly_added_dept_id) = mysqli_fetch_row($result);
     ////Set default rights into department//////
     $num_rows = sizeof($data_array);
     for($index = 0; $index < $num_rows; $index++)
@@ -161,7 +161,7 @@ elseif(isset($_POST['submit']) && $_POST['submit'] == 'Show Department')
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
     echo '<table name="main" cellspacing="15" border="0">';
     echo '<th>ID</th><th>' . msg('department') . '</th>';
-    list($ldepartment) = mysql_fetch_row($result);
+    list($ldepartment) = mysqli_fetch_row($result);
     echo '<tr><td>' . $_POST['item'] . '</td>';
     echo '<td>' . $ldepartment . '</td></tr>';
 ?>
@@ -172,7 +172,7 @@ elseif(isset($_POST['submit']) && $_POST['submit'] == 'Show Department')
     // Display all users assigned to this department
     $query = "SELECT {$GLOBALS['CONFIG']['db_prefix']}department.id, {$GLOBALS['CONFIG']['db_prefix']}user.first_name, {$GLOBALS['CONFIG']['db_prefix']}user.last_name FROM {$GLOBALS['CONFIG']['db_prefix']}department, {$GLOBALS['CONFIG']['db_prefix']}user where {$GLOBALS['CONFIG']['db_prefix']}department.id='$_POST[item]' and {$GLOBALS['CONFIG']['db_prefix']}user.department='$_POST[item]'";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-    while(list($lid, $lfirst_name, $llast_name) = mysql_fetch_row($result))
+    while(list($lid, $lfirst_name, $llast_name) = mysqli_fetch_row($result))
     {
         echo '<tr><td colspan="2">'.$lfirst_name.' '.$llast_name.'</td></tr>';
     }
@@ -200,12 +200,12 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'showpick')
     <?php
     $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-    while(list($lid, $lname) = mysql_fetch_row($result))
+    while(list($lid, $lname) = mysqli_fetch_row($result))
     {
         echo '<option value="' . $lid . '">' . $lname . '</option>';
     }
 
-    mysql_free_result ($result);
+    mysqli_free_result ($result);
     ?>
                                         </select></td>
                                     <td colspan="" align="center">
@@ -249,7 +249,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'delete')
     echo '<table border=0>';
     $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department where id={$_REQUEST['item']}";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in department lookup: $query. " . mysqli_error($conn)());
-    while(list($lid, $lname) = mysql_fetch_row($result))
+    while(list($lid, $lname) = mysqli_fetch_row($result))
     {
         echo '<tr><td>' .msg('label_id'). ' # :</td><td>' . $lid . '</td></tr>';
         echo '<tr><td>'.msg('label_name').' :</td><td>' . $lname . '</td></tr>';
@@ -267,11 +267,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'delete')
             <td>
                   <select name="assigned_id">
                       <?php
-                            while(list($lid, $lname) = mysql_fetch_row($reassign_list_result))
+                            while(list($lid, $lname) = mysqli_fetch_row($reassign_list_result))
                             {
                                 echo '<option value="' . $lid . '">' . $lname . '</option>';
                             }
-                            mysql_free_result ($reassign_list_result);
+                            mysqli_free_result ($reassign_list_result);
                             ?>
                     </select>
             </td>
@@ -306,13 +306,13 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'deletepick')
                             <?php
                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                            while(list($lid, $lname) = mysql_fetch_row($result))
+                            while(list($lid, $lname) = mysqli_fetch_row($result))
                             {
                                 $str = '<option value="' . $lid . '"';
                                 $str .= '>' . $lname . '</option>';
                                 echo $str;
                             }
-                            mysql_free_result ($result);
+                            mysqli_free_result ($result);
                             $deletepick='';
                             ?>
                     </select></td>
@@ -381,7 +381,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'modify')
                                             <?php
                                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department where id='$_REQUEST[item]'";
                                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                                            while(list($lid, $lname) = mysql_fetch_row($result))
+                                            while(list($lid, $lname) = mysqli_fetch_row($result))
                                             {
                                                 ?>
                                         <td>
@@ -397,7 +397,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'modify')
                                         </td>
                                              <?php
                                             }
-                                            mysql_free_result ($result);
+                                            mysqli_free_result ($result);
                                             ?>
                                     </tr>
                                     <tr>
@@ -437,11 +437,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'updatepick')
                                                     $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}department ORDER BY name";
                                                     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
 
-                                                    while(list($lid, $lname) = mysql_fetch_row($result))
+                                                    while(list($lid, $lname) = mysqli_fetch_row($result))
                                                     {
                                                         echo '<option value="' . $lid . '">' . $lname . '</option>';
                                                     }
-                                                    mysql_free_result ($result);
+                                                    mysqli_free_result ($result);
                                                     ?>
                                         </td>
                                         <td>

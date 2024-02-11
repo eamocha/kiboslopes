@@ -93,7 +93,7 @@ function showGrid($date) {
 				$popText .= $xx['evt_category'].': '.$evt['cnm'].' '.$evt['la2'];
 			}
 
-			mysql_free_result($rDrivers);
+			mysqli_free_result($rDrivers);
 
 			$popText = htmlspecialchars(addslashes($popText));
 
@@ -155,7 +155,7 @@ function showGrid($date) {
 		echo "</ul>";
 		echo "</div>";
 
-		mysql_free_result($rSet);
+		mysqli_free_result($rSet);
 
 
 

@@ -86,7 +86,7 @@ if(isset($_POST['login']))
     if (mysqli_num_rows($result) == 1)
     {        
         // register the user's ID
-        list($id, $username, $password) = mysql_fetch_row($result);
+        list($id, $username, $password) = mysqli_fetch_row($result);
         // initiate a session
         $_SESSION['uid'] = $id;
 
@@ -102,13 +102,13 @@ if(isset($_POST['login']))
         {
            redirect_visitor('out.php');
         }
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
         // close connection
     }
     else
     {
         // Login Failed
-        mysql_free_result ($result);
+        mysqli_free_result ($result);
         // redirect to error page
         
         // Call the plugin API

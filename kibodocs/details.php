@@ -207,7 +207,7 @@ if ($status == 0 || ($status == -1 && $filedata->isOwner($_SESSION['uid']) )) {
         $GLOBALS['smarty']->assign('check_out_link', $check_out_link);
     }
 
-    mysql_free_result($result2);
+    mysqli_free_result($result2);
 
     if ($userPermObj->getAuthority($_REQUEST['id'], $filedata) >= $userPermObj->ADMIN_RIGHT && !@isset($lrevision_id) && !$filedata->isArchived()) {
         // if user is also the owner of the file AND file is not checked out

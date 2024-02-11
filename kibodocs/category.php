@@ -100,7 +100,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'delete')
     echo '<table border=0>';
     $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category where id={$_REQUEST['item']}";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-    while(list($lid, $lname) = mysql_fetch_row($result))
+    while(list($lid, $lname) = mysqli_fetch_row($result))
     {
         echo '<tr><td>' .msg('label_id'). ' # :</td><td>' . $lid . '</td></tr>';
         echo '<tr><td>'.msg('label_name').' :</td><td>' . $lname . '</td></tr>';
@@ -117,11 +117,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'delete')
                             <?php
                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category WHERE id != '{$_REQUEST['item']}' ORDER BY name";
                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                            while(list($lid, $lname) = mysql_fetch_row($result))
+                            while(list($lid, $lname) = mysqli_fetch_row($result))
                             {
                                 echo '<option value="' . $lid . '">' . $lname . '</option>';
                             }
-                            mysql_free_result ($result);
+                            mysqli_free_result ($result);
                             ?>
                     </select>
             </td>
@@ -178,13 +178,13 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'deletepick')
                             <?php
                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category ORDER BY name";
                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                            while(list($lid, $lname) = mysql_fetch_row($result))
+                            while(list($lid, $lname) = mysqli_fetch_row($result))
                             {
                                 $str = '<option value="' . $lid . '"';
                                 $str .= '>' . $lname . '</option>';
                                 echo $str;
                             }
-                            mysql_free_result ($result);
+                            mysqli_free_result ($result);
                             $deletepick='';
                             ?>
                     </select></td>
@@ -212,7 +212,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'Show Category')
     $query = "SELECT name FROM {$GLOBALS['CONFIG']['db_prefix']}category where id='$category_id'";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
     echo('<table name="main" cellspacing="15" border="0">');
-    list($lcategory) = mysql_fetch_row($result);
+    list($lcategory) = mysqli_fetch_row($result);
     echo '<th>' .msg('label_name'). '</th><th>' .msg('label_id'). '</th>';
     echo '<tr>';
     echo '<td>' . $lcategory . '</td>';
@@ -230,7 +230,7 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'Show Category')
     echo msg('categoryviewpage_list_of_files_title') . '<br />';
     $query = "SELECT id, realname FROM `{$GLOBALS['CONFIG']['db_prefix']}data` WHERE category = '$category_id'";
     $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-    while(list($file_id, $file_name) = mysql_fetch_row($result)) {
+    while(list($file_id, $file_name) = mysqli_fetch_row($result)) {
         ?>
             <a href="edit.php?id=<?php echo $file_id; ?>&state=3">ID: <?php echo $file_id . ','; echo $file_name; ?></a><br />
      <?php  
@@ -251,11 +251,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'showpick')
                             <?php
                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category ORDER BY name";
                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                            while(list($lid, $lname) = mysql_fetch_row($result))
+                            while(list($lid, $lname) = mysqli_fetch_row($result))
                             {
                                 echo '<option value="' . $lid . '">' . $lname . '</option>';
                             }
-                            mysql_free_result ($result);
+                            mysqli_free_result ($result);
                             ?>
                     </select></td>
 
@@ -285,14 +285,14 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'Update')
                 // query to get a list of users
                 $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category where id='{$_REQUEST['item']}'";
                 $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                while(list($lid, $lname) = mysql_fetch_row($result))
+                while(list($lid, $lname) = mysqli_fetch_row($result))
                 {
                     echo '<tr>';
                     echo '<td colspan="2">' . msg('category') .': <input type="textbox" name="name" value="' . $lname . '" class="required" maxlength="40"></td>';
                     echo '<input type="hidden" name="id" value="' . $lid . '">';
 
                 }
-                mysql_free_result ($result);
+                mysqli_free_result ($result);
                 ?>
 
 
@@ -332,11 +332,11 @@ elseif(isset($_REQUEST['submit']) && $_REQUEST['submit'] == 'updatepick')
                             // query to get a list of users
                             $query = "SELECT id, name FROM {$GLOBALS['CONFIG']['db_prefix']}category ORDER BY name";
                             $result = mysqli_query($conn,$query, $GLOBALS['connection']) or die ("Error in query: $query. " . mysqli_error($conn)());
-                            while(list($lid, $lname) = mysql_fetch_row($result))
+                            while(list($lid, $lname) = mysqli_fetch_row($result))
                             {
                                 echo '<option value="' . $lid . '">' . $lname . '</option>';
                             }
-                            mysql_free_result ($result);
+                            mysqli_free_result ($result);
                             ?>
                 </td>
 

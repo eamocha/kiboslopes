@@ -397,7 +397,7 @@ if (($mode == "add_exe" or $mode == "upd_exe") and !$eMsg) { //no errors
 
 		$q = "INSERT INTO [db]events VALUES (NULL,DEFAULT,'$titEsc','$desEsc',$cid,$cid2,'$venEsc',$uid,DEFAULT,$pri,DEFAULT,'$sdate','$edate',DEFAULT,'$stime','$etime',$r_t,$r_i,$r_p,$r_m,'$runtil',$not,'$nml','".$todayD."',DEFAULT,DEFAULT,'$iid','$remksEsc')";
 		$result = dbQuery($q); //add to events table
-		$eid = mysql_insert_id(); //set id to new event
+		$eid = mysqli_insert_id(); //set id to new event
 
 
 		//add driver details
@@ -453,7 +453,7 @@ if (($mode == "add_exe" or $mode == "upd_exe") and !$eMsg) { //no errors
 			$result = dbQuery("UPDATE [db]events SET x_dates='$xda', editor='$uname', m_date='$todayD' WHERE event_id=$eid"); //exclude date from series
 			$q = "INSERT INTO [db]events VALUES (NULL,DEFAULT,'$titEsc','$desEsc',$cid,$cid2,'$venEsc',$uid,'".$uname."',$pri,DEFAULT,'$sdate','$edate',DEFAULT,'$stime','$etime',$r_t,$r_i,$r_p,$r_m,'$runtil',$not,'$nml','".$ada."','".$todayD."',DEFAULT,$iid,'$remksEsc')";
 			$result = dbQuery($q); //add new event
-			$eid = mysql_insert_id(); //set id to new event
+			$eid = mysqli_insert_id(); //set id to new event
 			$editN = 0;
 			$cMsg .= $xx['evt_confirm_added'];
 

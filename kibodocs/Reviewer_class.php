@@ -43,7 +43,7 @@ class Reviewer extends databaseData
         }
         
         $count = 0;
-        while (list($reviewer) = mysql_fetch_row($result)) {
+        while (list($reviewer) = mysqli_fetch_row($result)) {
             $reviewers[$count] = $reviewer;
             $count++;
         }

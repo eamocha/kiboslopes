@@ -981,7 +981,7 @@ echo $r['group_name'];?></strong> (Arrival Date: <i><?php echo date("D jS M Y", 
 					}
 
 
-					mysql_free_result($resultItenearyVisitorCheck);
+					mysqli_free_result($resultItenearyVisitorCheck);
 
 					 ?>
 						 <tr>
@@ -1029,7 +1029,7 @@ echo $r['group_name'];?></strong> (Arrival Date: <i><?php echo date("D jS M Y", 
 						}
 
 
-						mysql_free_result($resultItenearyVisitorCheck);		 
+						mysqli_free_result($resultItenearyVisitorCheck);		 
 
 
 

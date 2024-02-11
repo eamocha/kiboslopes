@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$.getJSON("populatehotels.php", function(data){
 		var selected=$("#hot_list");
 		for(i=0; i<data.length; i++){
-			var option=$("<option value="+data[i].hotel_id+">"+data[i].hotel_name+"</option>");			//NB if you used mysql_fetch_row/array then use above, but is you used object/assoc then you use .hotel_id etc
+			var option=$("<option value="+data[i].hotel_id+">"+data[i].hotel_name+"</option>");			//NB if you used mysqli_fetch_row/array then use above, but is you used object/assoc then you use .hotel_id etc
 
 			option.appendTo(selected);
 			

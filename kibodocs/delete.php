@@ -43,7 +43,7 @@ if( isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'tmpdel' )
         $_REQUEST['num_checkboxes'] =1;
     }
     // all ok, proceed!
-    //mysql_free_result($result);
+    //mysqli_free_result($result);
     if( !is_dir($GLOBALS['CONFIG']['archiveDir']) )
     {
         // Make sure directory is writeable
@@ -92,7 +92,7 @@ elseif( isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'view_del_archive' )
     $array_id = array();
     for($i = 0; $i < mysqli_num_rows($lresult); $i++)
     {
-        list($array_id[$i]) = mysql_fetch_row($lresult);
+        list($array_id[$i]) = mysqli_fetch_row($lresult);
     }
     $luserperm_obj = new UserPermission($_SESSION['uid'], $GLOBALS['connection'], DB_NAME);
     //$lfileobj_array = $luserperm_obj->convertToFileDataOBJ($array_id)
@@ -155,7 +155,7 @@ function pmt_delete($id)
         exit;
     }
     // all ok, proceed!
-    //mysql_free_result($result);
+    //mysqli_free_result($result);
     if(isset($id))
     {
         if(strchr($id, '_') )

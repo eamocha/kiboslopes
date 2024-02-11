@@ -29,7 +29,7 @@ if(mysqli_num_rows($resultEventId)>0)
 	$eventdate = $row_event->taskdate;
 	
 }
-mysql_free_result($resultEventId);
+mysqli_free_result($resultEventId);
 
 
 //update the database

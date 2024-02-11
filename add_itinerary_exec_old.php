@@ -65,7 +65,7 @@ $sql="INSERT INTO tbl_itinerary (`date`,`title`,`details`,`trip_id`,`hotel_id`,`
 
 $data=mysqli_query($conn,$sql) or die("Error occured during itenerary insert: ".mysqli_error($conn)());
 
-$last_insert_id = mysql_insert_id();
+$last_insert_id = mysqli_insert_id();
 
 //
 

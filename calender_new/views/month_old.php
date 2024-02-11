@@ -100,7 +100,7 @@ function showGrid($date) {
 		echo "</ul>";
 		echo "</div>";
 
-		mysql_free_result($rSet);
+		mysqli_free_result($rSet);
 
 
 		echo "<div class=\"event\">".$check.(($set['details4All'] or $mayEdit) ? "<span eventid='".$evt['eid']."' eventdate='".$date."' style=\"height:20px; z-index: 0\" class=\"evtTitle point\"".$eStyle." ondblclick=\"editE(".$evt['eid'].",'".$date."');\"" : "<span class=\"evtTitle arrow\"".$eStyle).$popAttr.">".$time." ".$evt['tit']."</span></div>\n";
