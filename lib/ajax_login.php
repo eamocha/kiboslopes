@@ -2,6 +2,9 @@
 
 include 'config.php';
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 //get the posted values
 
 $user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
@@ -17,20 +20,10 @@ if(isset($_POST['remember'])){
 }
 
 
-//now validating the username and password
+$sql="SELECT * FROM tbl_users WHERE email='$user_name' AND deleted=0";
 
-$sql="SELECT * FROM tbl_users WHERE email='".$user_name."' AND deleted=0";
-
-$result=mysqli_query($conn,$sql) ;//or die(mysqli_error($conn)($con));
- $row=mysqli_fetch_array($result) or die(mysqli_error($conn));
-if(mysqli_num_rows($result)>0){
-echo "iko";
-}else{
-	echo "haiko";
-}
-while($row){
-
-
+$result=mysqli_query($conn,$sql) or die("Error occured".mysqli_error($conn));  
+ $row=mysqli_fetch_array($result); 
 
 //if username exists
 
@@ -91,7 +84,7 @@ else
 
 		echo "no"; //Invalid Login
 
-}
+
 
 
 

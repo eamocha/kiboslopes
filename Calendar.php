@@ -50,7 +50,7 @@ class Calendar
 
     */
 
-    function Calendar()
+    function __construct()
 
     {
 

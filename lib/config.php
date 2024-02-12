@@ -2,10 +2,12 @@
 
 date_default_timezone_set  ("Africa/Nairobi");
 
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 $db_username = 'root';
-$db_password = '';
+$db_password = '123456';
 $db_name = 'reservation';
 $db_host = 'localhost';
 
@@ -16,7 +18,7 @@ if(!defined('DB_NAME')) define('DB_NAME',$db_name);
 
 
 
-$conn=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD)or die('Could not create a connection to the database : '.mysqli_error($conn)());
+$conn=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD)or die('Could not create a connection to the database : '.mysqli_error($conn));
 
 mysqli_select_db($conn,DB_NAME) or die('Could not select the database : '.mysqli_error($conn)());
 
